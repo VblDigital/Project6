@@ -13,7 +13,7 @@
                     <h2>{{ trick.name }}</h2>
                 </a>
                 <div class="list-group-item">{{ trick.chapo | raw }}<br/>
-                <a href="#">Lire la suite ...</a>
+                <a href="/trick/{{ trick.id }}">Lire la suite ...</a>
                 </div>
                 <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
                 <p class="list-group-item">Créé par {{ trick.userId }} || Catégorie :

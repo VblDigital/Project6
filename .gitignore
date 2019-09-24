@@ -20,7 +20,5 @@
 
 ###> misc ###
 /misc
-.env
-.env.test
 /.idea
 ###< misc ###

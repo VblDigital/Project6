@@ -11,7 +11,6 @@ class Trick
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -46,9 +45,22 @@ class Trick
      */
     private $userId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
+     * @ORM\JoinColumn(name="categorie_ìd", referencedColumnName="id", nullable=false)
+     */
+    private $categoryId;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -119,6 +131,18 @@ class Trick
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(int $categoryId): self
+    {
+        $this->categoryId = $categoryId;
 
         return $this;
     }

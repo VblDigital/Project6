@@ -9,7 +9,7 @@
     <section class="list-group">
         {% for trick in tricks %}
             <div class="list-group">
-                <a href="#" class="list-group-item active">
+                <a href="/trick/{{ trick.id }}" class="list-group-item active">
                     <h2>{{ trick.name }}</h2>
                 </a>
                 <div class="list-group-item">{{ trick.chapo | raw }}<br/>

@@ -4,10 +4,18 @@ namespace App\DataFixtures;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class CommentFixtures extends Fixture
+class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies ()
+    {
+        return array(
+            TrickFixtures::class,
+            UserFixtures::class);
+    }
+
     public function load(ObjectManager $manager)
     {
         $comment = new Comment();

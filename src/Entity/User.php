@@ -11,6 +11,7 @@ class User
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -39,6 +40,16 @@ class User
      * @ORM\Column(type="integer")
      */
     private $newPass;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="user")
+     */
+    private $tricks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
 
     public function getId(): ?int
     {
@@ -110,5 +121,15 @@ class User
         $this->newPass = $newPass;
 
         return $this;
+    }
+
+    public function getTricks ()
+    {
+        return $this->tricks;
+    }
+
+    public function getComments ()
+    {
+        return $this->comments;
     }
 }

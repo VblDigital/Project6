@@ -7,10 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
+
 class Comment
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -26,14 +28,16 @@ class Comment
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_ìd", referencedColumnName="id", nullable=false)
      */
-    private $userId;
+    private $user;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
+     * @ORM\JoinColumn(name="trick_ìd", referencedColumnName="id", nullable=false)
      */
-    private $trickId;
+    private $trick;
 
     public function getId(): ?int
     {
@@ -64,33 +68,33 @@ class Comment
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(\DateTimeInterface $date)
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(int $userId): self
+    public function setUser ($user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getTrickId(): ?int
+    public function getTrick()
     {
-        return $this->trickId;
+        return $this->trick;
     }
 
-    public function setTrickId(int $trickId): self
+    public function setTrick ($trick)
     {
-        $this->trickId = $trickId;
+        $this->trick = $trick;
 
         return $this;
     }

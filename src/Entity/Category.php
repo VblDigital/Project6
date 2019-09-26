@@ -12,6 +12,7 @@ class Category
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -53,5 +54,10 @@ class Category
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getTricks ()
+    {
+        return $this->tricks;
     }
 }

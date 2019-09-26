@@ -11,12 +11,14 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $category = new Category();
-        $category->setId("1")->setName("Les Grabs");
+        $category->setName("Les Grabs");
         $manager->persist($category);
+        $this->addReference("cat1", $category);
 
         $category = new Category();
-        $category->setId("2")->setName("Les rotations");
+        $category->setName("Les Rotations");
         $manager->persist($category);
+        $this->addReference("cat2", $category);
 
         $manager->flush();
     }

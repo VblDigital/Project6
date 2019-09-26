@@ -11,6 +11,7 @@ class Trick
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -41,15 +42,21 @@ class Trick
     private $videoLink;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
-    private $userId;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
      * @ORM\JoinColumn(name="categorie_ìd", referencedColumnName="id", nullable=false)
      */
-    private $categoryId;
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     */
+    private $comments;
 
     public function getId(): ?int
     {
@@ -123,27 +130,38 @@ class Trick
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(int $userId): self
+    /**
+     * @param mixed $user
+     */
+    public function setUser ( $user )
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
-        return $this;
+        return $user;
     }
 
-    public function getCategoryId(): ?int
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
-    public function setCategoryId(int $categoryId): self
+    /**
+     * @param mixed $category
+     */
+    public function setCategory ($category)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
-        return $this;
+        return $category;
+    }
+
+    public function getComments ()
+    {
+        return $this->comments;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +58,11 @@ class Trick
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
      */
     private $comments;
+
+    public function __construct ()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,9 +156,6 @@ class Trick
         return $this->category;
     }
 
-    /**
-     * @param mixed $category
-     */
     public function setCategory ($category)
     {
         $this->category = $category;
@@ -163,5 +166,27 @@ class Trick
     public function getComments ()
     {
         return $this->comments;
+    }
+
+    public function addComment(Comment $comment):self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment (Comment $comment):self
+    {
+        if($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            if($comment->getTrick() === $this){
+                $comment->setTrick(null);
+            }
+        }
+
+        return $this;
     }
 }

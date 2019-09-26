@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +55,12 @@ class User
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __construct ()
+    {
+        $this->tricks = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function setId(string $id): self
@@ -128,8 +135,52 @@ class User
         return $this->tricks;
     }
 
+    public function addTrick(Trick $trick): self
+    {
+        if($this->tricks->contains($trick)){
+            $this->tricks[] = $trick;
+            $trick->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrick(Trick $trick): self
+    {
+        if($this->tricks->contains($trick)){
+            $this->tricks->removeElement($trick);
+            if($trick->getCategory() === $this){
+                $trick->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getComments ()
     {
         return $this->comments;
+    }
+
+    public function addComment(Comment $comment):self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment (Comment $comment):self
+    {
+        if($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            if($comment->getTrick() === $this){
+                $comment->setTrick(null);
+            }
+        }
+
+        return $this;
     }
 }

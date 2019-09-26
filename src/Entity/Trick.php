@@ -171,7 +171,7 @@ class Trick
     public function addComment(Comment $comment):self
     {
         if ($this->comments->contains($comment)) {
-            $this->comments[] = $comment;
+            $this->comments->add($comment);
             $comment->setTrick($this);
         }
 

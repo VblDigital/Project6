@@ -64,7 +64,7 @@ class Category
     public function addTrick(Trick $trick): self
     {
         if($this->tricks->contains($trick)){
-            $this->tricks[] = $trick;
+            $this->tricks->add($trick);
             $trick->setCategory($this);
         }
 

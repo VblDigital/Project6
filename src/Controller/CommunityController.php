@@ -31,17 +31,4 @@ class CommunityController extends AbstractController
             'controller_name' => 'CommunityController',
         ]);
     }
-
-    /**
-     * @Route("/trick/{id}", name="view_trick")
-     */
-    public function viewTrick($id)
-    {
-        $repo = $this->getDoctrine()->getRepository(Trick::class);
-        $trick = $repo->find($id);
-
-        return $this->render('community/viewTrick.html.twig', [
-            'trick' => $trick
-        ]);
-    }
 }

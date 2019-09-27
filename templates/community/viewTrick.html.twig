@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SnowTricks{% endblock %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>{{ trick.name }}</h2>
+            <div>{{ trick.description | raw }}
+            </div>
+            <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
+            <p class="list-group-item">Créé par || Catégorie :
+            </p>
+            <p><a href="/">Retour</a></p>
+        </div>
+    </div>
+{% endblock %}

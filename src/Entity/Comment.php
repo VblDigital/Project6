@@ -39,60 +39,95 @@ class Comment
      */
     private $trick;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    /**
+     * @param string $id
+     * @return Comment
+     */
+    public function setId( string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
-    public function setText(string $text): self
+    /**
+     * @param string $text
+     * @return Comment
+     */
+    public function setText( string $text): self
     {
         $this->text = $text;
 
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date)
+    /**
+     * @param \DateTimeInterface $date
+     * @return $this
+     */
+    public function setDate( \DateTimeInterface $date)
     {
         $this->date = $date;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser ($user)
+    /**
+     * @param $user
+     * @return $this
+     */
+    public function setUser ( $user)
     {
         $this->user = $user;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTrick()
     {
         return $this->trick;
     }
 
-    public function setTrick ($trick)
+    /**
+     * @param $trick
+     * @return $this
+     */
+    public function setTrick ( $trick)
     {
         $this->trick = $trick;
 

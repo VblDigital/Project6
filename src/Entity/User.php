@@ -52,90 +52,142 @@ class User
      */
     private $comments;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * User constructor.
+     */
     public function __construct ()
     {
         $this->tricks = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
-    public function setId(string $id): self
+    /**
+     * @param string $id
+     * @return User
+     */
+    public function setId( string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    /**
+     * @param string $username
+     * @return User
+     */
+    public function setUsername( string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @param string $password
+     * @return User
+     */
+    public function setPassword( string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    /**
+     * @param string $email
+     * @return User
+     */
+    public function setEmail( string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    /**
+     * @param string $type
+     * @return User
+     */
+    public function setType( string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getNewPass(): ?int
     {
         return $this->newPass;
     }
 
-    public function setNewPass(int $newPass): self
+    /**
+     * @param int $newPass
+     * @return User
+     */
+    public function setNewPass( int $newPass): self
     {
         $this->newPass = $newPass;
 
         return $this;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getTricks ()
     {
         return $this->tricks;
     }
 
-    public function addTrick(Trick $trick): self
+    /**
+     * @param Trick $trick
+     * @return User
+     */
+    public function addTrick( Trick $trick): self
     {
         if($this->tricks->contains($trick)){
             $this->tricks->add($trick);
@@ -145,7 +197,11 @@ class User
         return $this;
     }
 
-    public function removeTrick(Trick $trick): self
+    /**
+     * @param Trick $trick
+     * @return User
+     */
+    public function removeTrick( Trick $trick): self
     {
         if($this->tricks->contains($trick)){
             $this->tricks->removeElement($trick);
@@ -157,12 +213,19 @@ class User
         return $this;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getComments ()
     {
         return $this->comments;
     }
 
-    public function addComment(Comment $comment):self
+    /**
+     * @param Comment $comment
+     * @return User
+     */
+    public function addComment( Comment $comment):self
     {
         if ($this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -172,7 +235,11 @@ class User
         return $this;
     }
 
-    public function removeComment (Comment $comment):self
+    /**
+     * @param Comment $comment
+     * @return User
+     */
+    public function removeComment ( Comment $comment):self
     {
         if($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);

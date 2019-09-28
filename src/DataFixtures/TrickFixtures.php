@@ -7,8 +7,15 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class TrickFixtures
+ * @package App\DataFixtures
+ */
 class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * @return array
+     */
     public function getDependencies ()
     {
         return array(
@@ -16,7 +23,10 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             CategoryFixtures::class);
     }
 
-    public function load(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load( ObjectManager $manager)
     {
         $trick = new Trick();
         $trick

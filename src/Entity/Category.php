@@ -14,6 +14,7 @@ class Category
      * @ORM\Id()
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
      */
     private $id;
 
@@ -32,36 +33,57 @@ class Category
         $this->tricks = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    /**
+     * @var string $id
+     * @return Category
+     */
+    public function setId( string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @var string $name
+     * @return Category
+     */
+    public function setName( string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getTricks ()
     {
         return $this->tricks;
     }
 
-    public function addTrick(Trick $trick): self
+    /**
+     * @var Trick $trick
+     * @return Category
+     */
+    public function addTrick( Trick $trick): self
     {
         if($this->tricks->contains($trick)){
             $this->tricks->add($trick);
@@ -71,7 +93,11 @@ class Category
         return $this;
     }
 
-    public function removeTrick(Trick $trick): self
+    /**
+     * @var Trick $trick
+     * @return Category
+     */
+    public function removeTrick( Trick $trick): self
     {
         if($this->tricks->contains($trick)){
             $this->tricks->removeElement($trick);

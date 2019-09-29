@@ -59,83 +59,131 @@ class Trick
      */
     private $comments;
 
+    /**
+     * Trick constructor.
+     */
     public function __construct ()
     {
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    /**
+     * @param string $id
+     * @return Trick
+     */
+    public function setId( string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param string $name
+     * @return Trick
+     */
+    public function setName( string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getChapo(): ?string
     {
         return $this->chapo;
     }
 
-    public function setChapo(string $chapo): self
+    /**
+     * @param string $chapo
+     * @return Trick
+     */
+    public function setChapo( string $chapo): self
     {
         $this->chapo = $chapo;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    /**
+     * @param string $description
+     * @return Trick
+     */
+    public function setDescription( string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageLink(): ?string
     {
         return $this->imageLink;
     }
 
-    public function setImageLink(?string $imageLink): self
+    /**
+     * @param string|null $imageLink
+     * @return Trick
+     */
+    public function setImageLink( ?string $imageLink): self
     {
         $this->imageLink = $imageLink;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getVideoLink(): ?string
     {
         return $this->videoLink;
     }
 
-    public function setVideoLink(?string $videoLink): self
+    /**
+     * @param string|null $videoLink
+     * @return Trick
+     */
+    public function setVideoLink( ?string $videoLink): self
     {
         $this->videoLink = $videoLink;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUser()
     {
         return $this->user;
@@ -151,24 +199,38 @@ class Trick
         return $user;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategory()
     {
         return $this->category;
     }
 
-    public function setCategory ($category)
+    /**
+     * @param $category
+     * @return mixed
+     */
+    public function setCategory ( $category)
     {
         $this->category = $category;
 
         return $category;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getComments ()
     {
         return $this->comments;
     }
 
-    public function addComment(Comment $comment):self
+    /**
+     * @param Comment $comment
+     * @return Trick
+     */
+    public function addComment( Comment $comment):self
     {
         if ($this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -178,7 +240,11 @@ class Trick
         return $this;
     }
 
-    public function removeComment (Comment $comment):self
+    /**
+     * @param Comment $comment
+     * @return Trick
+     */
+    public function removeComment ( Comment $comment):self
     {
         if($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);

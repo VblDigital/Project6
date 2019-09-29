@@ -6,9 +6,16 @@ use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class CategoryFixtures
+ * @package App\DataFixtures
+ */
 class CategoryFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load( ObjectManager $manager)
     {
         $category = new Category();
         $category->setName("Les Grabs");

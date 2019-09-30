@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un trick{% endblock %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Création d'un trick</h2>
+
+            {{ form_start(formTrick) }}
+
+            {{ form_row(formTrick.name, {'label': 'Nom' }) }}
+            {{ form_row(formTrick.chapo, {'label': 'Chapo' }) }}
+            {{ form_row(formTrick.description, {'label': 'Description' }) }}
+            {{ form_row(formTrick.imageLink, {'label': 'Lien vers l\'image' }) }}
+            {{ form_row(formTrick.videoLink, {'label': 'Lien vers la vidéo' }) }}
+
+            <button type="submit" class="btn btn-primary">Valider</button>
+
+            {{ form_end(formTrick) }}
+        </div>
+    </div>
+{% endblock %}

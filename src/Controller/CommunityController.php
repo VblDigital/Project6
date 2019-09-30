@@ -6,6 +6,10 @@ use App\Entity\Trick;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CommunityController
+ * @package App\Controller
+ */
 class CommunityController extends AbstractController
 {
     /**

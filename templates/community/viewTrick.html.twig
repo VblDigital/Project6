@@ -11,6 +11,15 @@
             <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
             <p class="list-group-item">Créé par {{ trick.user.username }} || Catégorie : {{ trick.category.name }}
             </p>
+            <h4>Les commentaires</h4>
+            <div class="list-group">
+                {% for comment in trick.comments %}
+                    <div class="list-group-item">{{ comment.text | raw }}<br/>
+                    </div>
+                    <p class="list-group-item">Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                        -------------------------------------------
+                    </p>
+                {% endfor %}
             <p><a href="/">Retour</a></p>
         </div>
     </div>

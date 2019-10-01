@@ -45,6 +45,14 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $comment->setUser($this->getReference('amerkel'));
         $manager->persist($comment);
 
+        $comment = new Comment();
+        $comment
+            ->setText("Ceci est le troisième commentaire de test de ce site communautaire.")
+            ->setDate(new \DateTime());
+        $comment->setTrick($this->getReference('td'));
+        $comment->setUser($this->getReference('bobama'));
+        $manager->persist($comment);
+
         $manager->flush();
     }
 }

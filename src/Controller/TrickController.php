@@ -16,23 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class TrickController
  * @package App\Controller
  */
-class TrickController extends CommunityController implements DependentFixtureInterface
+class TrickController extends CommunityController
 {
-    /**
-     * @return array
-     */
-    public function getDependencies ()
-    {
-        return array(
-            UserFixtures::class,
-            CategoryFixtures::class);
-    }
-
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
      */
-
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
         if(!$trick){
@@ -54,7 +43,7 @@ class TrickController extends CommunityController implements DependentFixtureInt
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
             'editMode' => $trick->getId() !== null
-            ]);
+        ]);
     }
 
     /**

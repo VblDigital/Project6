@@ -32,25 +32,25 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $comment = new Comment();
         $comment
             ->setText("Ceci est le premier commentaire de test de ce site communautaire.")
-            ->setDate(new \DateTime());
-        $comment->setTrick($this->getReference('td'));
-        $comment->setUser($this->getReference('bobama'));
+            ->setDate(new \DateTime())
+            ->setTrick($this->getReference('td'))
+            ->setUser($this->getReference('bobama'));
         $manager->persist($comment);
 
         $comment = new Comment();
         $comment
             ->setText("Ceci est le deuxième commentaire de test de ce site communautaire.")
-            ->setDate(new \DateTime());
-        $comment->setTrick($this->getReference('r36'));
-        $comment->setUser($this->getReference('amerkel'));
+            ->setDate(new \DateTime())
+            ->setTrick($this->getReference('r36'))
+            ->setUser($this->getReference('amerkel'));
         $manager->persist($comment);
 
         $comment = new Comment();
         $comment
             ->setText("Ceci est le troisième commentaire de test de ce site communautaire.")
-            ->setDate(new \DateTime());
-        $comment->setTrick($this->getReference('td'));
-        $comment->setUser($this->getReference('bobama'));
+            ->setDate(new \DateTime())
+            ->setTrick($this->getReference('td'))
+            ->setUser($this->getReference('bobama'));
         $manager->persist($comment);
 
         $manager->flush();

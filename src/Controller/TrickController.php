@@ -9,7 +9,6 @@ use App\Entity\Trick;
 use App\Form\TrickType;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use function PHPSTORM_META\type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,11 +30,14 @@ class TrickController extends CommunityController implements DependentFixtureInt
 
     /**
      * @Route("/newtrick", name="new_trick")
+     * @Route("/trick/{id}/edit", name="edit_trick")
      */
 
-    public function trickForm(Request $request, ObjectManager $manager)
+    public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
-        $trick = new Trick();
+        if(!$trick){
+            $trick = new Trick();
+        }
 
         $form = $this->createForm(TrickType::class, $trick);
 
@@ -50,7 +52,8 @@ class TrickController extends CommunityController implements DependentFixtureInt
         }
 
         return $this->render('community/newTrick.html.twig', [
-            'formTrick' => $form->createView()
+            'formTrick' => $form->createView(),
+            'editMode' => $trick->getId() !== null
             ]);
     }
 

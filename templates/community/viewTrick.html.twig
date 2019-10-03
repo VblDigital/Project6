@@ -8,18 +8,39 @@
             <h2>{{ trick.name }}</h2>
             <div>{{ trick.description | raw }}
             </div>
-            <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
-            <p class="list-group-item">Créé par {{ trick.user.username }} || Catégorie : {{ trick.category.name }}
+            <div style="padding-bottom: 10px">
+                {% if trick.imageLink is not empty %}
+                    <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
+                {% endif %}
+            </div>
+            <p>Créé par {{ trick.user.username }} || Catégorie : {{ trick.category.name }}
             </p>
-            <h4>Les commentaires</h4>
             <div class="list-group">
-                {% for comment in trick.comments %}
-                    <div class="list-group-item">{{ comment.text | raw }}<br/>
-                    </div>
-                    <p class="list-group-item">Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
-                        -------------------------------------------
-                    </p>
-                {% endfor %}
+                <h4>Les commentaires</h4>
+                {% if trick.comments is empty %}
+                    <p>Publier le premier commentaire !</p>
+                {% else %}
+                    {% for comment in trick.comments %}
+                        <div class="list-group-item">{{ comment.text | raw }}<br/>
+                        </div>
+                        <p class="list-group-item">Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                            -------------------------------------------
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <h6>Nouveau commentaire</h6>
+
+                {{ form_start(formComment) }}
+
+                {{ form_row(formComment.user, {'label': 'Auteur' }) }}
+                {{ form_row(formComment.text, {'label': 'Commentaire' }) }}
+
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+                {{ form_end(formComment) }}
+            </div>
             <p>
                 <a href="/trick/{{ trick.id }}id}/edit"><img src="{{ asset('/img/pen.png') }}" />Modifier le Trick</a>
             </p>

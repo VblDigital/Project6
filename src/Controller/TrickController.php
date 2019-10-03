@@ -3,11 +3,10 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\CategoryFixtures;
-use App\DataFixtures\UserFixtures;
 use App\Entity\Trick;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\TrickType;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,13 +48,30 @@ class TrickController extends CommunityController
     /**
      * @Route("/trick/{id}", name="view_trick")
      */
-    public function viewTrick($id)
+    public function viewTrick($id, Request $request, ObjectManager $manager)
     {
         $repo = $this->getDoctrine()->getRepository(Trick::class);
         $trick = $repo->find($id);
 
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setDate(new \DateTime())
+                    ->setTrick($trick);
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+        }
+
         return $this->render('community/viewTrick.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
+            'formComment' => $form->createView()
         ]);
     }
 }

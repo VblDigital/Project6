@@ -22,7 +22,6 @@ class UserFixtures extends Fixture
             ->setUsername('bobama')
             ->setPassword('12345')
             ->setEmail('bobama@usa.com')
-            ->setType('admin')
             ->setNewPass('0');
         $manager->persist($user);
         $this->addReference('bobama', $user);
@@ -32,17 +31,15 @@ class UserFixtures extends Fixture
             ->setUsername('emacron')
             ->setPassword('54321')
             ->setEmail('emacron@france.fr')
-            ->setType('author')
             ->setNewPass('0');
         $manager->persist($user);
         $this->addReference('emacron', $user);
 
-        $user = new User();
+        $user = new user();
         $user
             ->setUsername('amerkel')
             ->setPassword('12345')
             ->setEmail('bobama@usa.com')
-            ->setType('author')
             ->setNewPass('0');
         $manager->persist($user);
         $this->addReference('amerkel', $user);

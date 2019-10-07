@@ -5,10 +5,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="Ce pseudonyme est déjà utilisé."
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -18,24 +27,25 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="6", minMessage="Votre mot de passe doir contenir 6 caractères")
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Votre mot de passe doit être identique")
+     */
+     public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
 
     /**
      * @ORM\Column(type="integer")
@@ -61,7 +71,7 @@ class User
     }
 
     /**
-     * User constructor.
+     * user constructor.
      */
     public function __construct ()
     {
@@ -71,7 +81,7 @@ class User
 
     /**
      * @param string $id
-     * @return User
+     * @return user
      */
     public function setId( string $id): self
     {
@@ -90,7 +100,7 @@ class User
 
     /**
      * @param string $username
-     * @return User
+     * @return user
      */
     public function setUsername( string $username): self
     {
@@ -109,7 +119,7 @@ class User
 
     /**
      * @param string $password
-     * @return User
+     * @return user
      */
     public function setPassword( string $password): self
     {
@@ -128,30 +138,11 @@ class User
 
     /**
      * @param string $email
-     * @return User
+     * @return user
      */
     public function setEmail( string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     * @return User
-     */
-    public function setType( string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -166,13 +157,28 @@ class User
 
     /**
      * @param int $newPass
-     * @return User
+     * @return user
      */
     public function setNewPass( int $newPass): self
     {
         $this->newPass = $newPass;
 
         return $this;
+    }
+
+    public function eraseCredentials ()
+    {
+
+    }
+
+    public function getSalt ()
+    {
+
+    }
+
+    public function getRoles ()
+    {
+        return ['ROLE_USER'];
     }
 
     /**
@@ -185,7 +191,7 @@ class User
 
     /**
      * @param Trick $trick
-     * @return User
+     * @return user
      */
     public function addTrick( Trick $trick): self
     {
@@ -199,7 +205,7 @@ class User
 
     /**
      * @param Trick $trick
-     * @return User
+     * @return user
      */
     public function removeTrick( Trick $trick): self
     {
@@ -223,7 +229,7 @@ class User
 
     /**
      * @param Comment $comment
-     * @return User
+     * @return user
      */
     public function addComment( Comment $comment):self
     {
@@ -237,7 +243,7 @@ class User
 
     /**
      * @param Comment $comment
-     * @return User
+     * @return user
      */
     public function removeComment ( Comment $comment):self
     {

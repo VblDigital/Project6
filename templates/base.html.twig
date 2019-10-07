@@ -14,8 +14,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ path('new_user') }}">Créer un compte</a></li>
-                        <li class="active"><a href="#">Se connecter</a></li>
+                        <li class="active"><a href="{{ path('security_registration') }}">Créer un compte</a></li>
+
+                        {% if not app.user %}
+                        <li class="active"><a href="{{ path('security_login') }}">Se connecter</a></li>
+                        {% else %}
+                        <li class="active"><a href="{{ path('security_logout') }}">Se deconnecter</a></li>
+                        {% endif %}
                         <li class="active"><a href="{{ path('new_trick') }}">Créer un nouveau Trick</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

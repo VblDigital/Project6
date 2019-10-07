@@ -7,9 +7,11 @@
         <div class="panel-body">
             <h2>Création d'un trick</h2>
 
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <p>Auteur: {{ app.user.username }}</p>
+            {% endif %}
             {{ form_start(formTrick) }}
 
-            {{ form_row(formTrick.user, {'label': 'Auteur' }) }}
             {{ form_row(formTrick.name, {'label': 'Nom' }) }}
             {{ form_row(formTrick.chapo, {'label': 'Chapo' }) }}
             {{ form_row(formTrick.description, {'label': 'Description' }) }}

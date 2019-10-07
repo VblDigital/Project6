@@ -13,42 +13,47 @@
                     <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
                 {% endif %}
             </div>
-            <p>Créé par {{ trick.user.username }} || Catégorie : {{ trick.category.name }}
+            <p>Dernière modification par {{ trick.user.username }} le {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
             </p>
             <div class="list-group">
                 <h4>Les commentaires</h4>
                 {% if trick.comments is empty %}
                     <p>Publier le premier commentaire !</p>
                 {% else %}
-                    {% for comment in trick.comments %}
-                        <div class="list-group-item">{{ comment.text | raw }}<br/>
-                        </div>
-                        <p class="list-group-item">Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                    {% for comment in trick.comments|sort|reverse %}
+                        <div>
+                            {{ comment.text | raw }}<br/>
+                            Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
                             -------------------------------------------
-                        </p>
+                        </div>
                     {% endfor %}
                 {% endif %}
             </div>
             <div>
                 {% if app.user %}
-                    <h6>Nouveau commentaire</h6>
+                    <h4>Nouveau commentaire</h4>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p>Auteur: {{ app.user.username }}</p>
+                    {% endif %}
 
                     {{ form_start(formComment) }}
 
-                    {{ form_row(formComment.user, {'label': 'Auteur' }) }}
                     {{ form_row(formComment.text, {'label': 'Commentaire' }) }}
 
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
 
                     {{ form_end(formComment) }}
                 {% else %}
-                    <h4>Il faut vous <a href="{{ path('security_login') }}">connecter</a> pour commenter</h4>
+                    <h5>Il faut vous <a href="{{ path('security_login') }}">connecter</a> pour modifier le Trick ou insérer un commentaire.</h5>
                 {% endif %}
             </div>
-            <p style="padding-top: 10px">
+            {% if app.user %}
+            <p class="pt10">
                 <a href="/trick/{{ trick.id }}id}/edit">
                     <i class="far fa-edit fa-2x"></i>Modifier le Trick</a>
             </p>
+            {% endif %}
             <p><a href="/">Retour</a></p>
         </div>
     </div>

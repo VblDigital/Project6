@@ -17,8 +17,10 @@ class CommunityController extends AbstractController
      */
     public function home()
     {
-        $repoTrick = $this->getDoctrine()->getRepository(Trick::class);
-        $tricks = $repoTrick->findAll();
+        $tricks = $this->getDoctrine()
+            ->getRepository(Trick::class)
+            ->getFindAllQuery();
+        //Il ne reconnaît pas ma fonction (ref doc : https://symfony.com/doc/current/doctrine.html Querying for Objects: The Repository)
 
         return $this->render('community/home.html.twig', [
             'title' => "Salut les Snowboarders !",

@@ -7,7 +7,7 @@
         <h1>{{ title }}</h1>
     </div>
     <section class="list-group">
-        {% for trick in tricks %}
+        {% for trick in tricks|sort|reverse %}
             <div class="list-group">
                 <a href="/trick/{{ trick.id }}" class="list-group-item active">
                     <h2>{{ trick.name }}</h2>

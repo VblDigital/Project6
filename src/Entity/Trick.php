@@ -18,6 +18,11 @@ class Trick
     private $id;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $last_edit_date;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -82,6 +87,25 @@ class Trick
     public function setId( string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getLastEditDate():?\DateTimeInterface
+    {
+        return $this->last_edit_date;
+    }
+
+    /**
+     * @param \DateTimeInterface $last_edit_date
+     * @return Trick
+     */
+    public function setLastEditDate( \DateTimeInterface $last_edit_date)
+    {
+        $this->last_edit_date = $last_edit_date;
 
         return $this;
     }

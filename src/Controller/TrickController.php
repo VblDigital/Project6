@@ -33,6 +33,10 @@ class TrickController extends CommunityController
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            $trick
+                ->setLastEditDate(new \DateTime())
+                ->setUser($this->getUser());
+
             $manager->persist($trick);
             $manager->flush();
 
@@ -61,7 +65,8 @@ class TrickController extends CommunityController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime())
-                    ->setTrick($trick);
+                    ->setTrick($trick)
+                    ->setUser($this->getUser());
 
             $manager->persist($comment);
             $manager->flush();

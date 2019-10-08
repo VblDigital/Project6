@@ -24,7 +24,7 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
-    public function getFindAllQuery()
+    public function findQueryForPagination()
     {
         $query = $this->_em->createQueryBuilder()
             ->select('e')

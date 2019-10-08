@@ -30,19 +30,24 @@
                 {% endif %}
             </div>
             <div>
-                <h6>Nouveau commentaire</h6>
+                {% if app.user %}
+                    <h6>Nouveau commentaire</h6>
 
-                {{ form_start(formComment) }}
+                    {{ form_start(formComment) }}
 
-                {{ form_row(formComment.user, {'label': 'Auteur' }) }}
-                {{ form_row(formComment.text, {'label': 'Commentaire' }) }}
+                    {{ form_row(formComment.user, {'label': 'Auteur' }) }}
+                    {{ form_row(formComment.text, {'label': 'Commentaire' }) }}
 
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
 
-                {{ form_end(formComment) }}
+                    {{ form_end(formComment) }}
+                {% else %}
+                    <h4>Il faut vous <a href="{{ path('security_login') }}">connecter</a> pour commenter</h4>
+                {% endif %}
             </div>
-            <p>
-                <a href="/trick/{{ trick.id }}id}/edit"><img src="{{ asset('/img/pen.png') }}" />Modifier le Trick</a>
+            <p style="padding-top: 10px">
+                <a href="/trick/{{ trick.id }}id}/edit">
+                    <i class="far fa-edit fa-2x"></i>Modifier le Trick</a>
             </p>
             <p><a href="/">Retour</a></p>
         </div>

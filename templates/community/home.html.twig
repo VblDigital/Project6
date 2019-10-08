@@ -6,8 +6,11 @@
     <div class="jumbotron">
         <h1>{{ title }}</h1>
     </div>
+    {% include '/shared/pagination.html.twig' with {
+        'route': 'list_page'
+    } %}
     <section class="list-group">
-        {% for trick in tricks|sort|reverse %}
+        {% for trick in tricks %}
             <div class="list-group">
                 <a href="/trick/{{ trick.id }}" class="list-group-item active">
                     <h2>{{ trick.name }}</h2>
@@ -21,4 +24,7 @@
             </div>
         {% endfor %}
     </section>
+    {% include '/shared/pagination.html.twig' with {
+        'route': 'list_page'
+    } %}
 {% endblock %}

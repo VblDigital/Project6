@@ -27,7 +27,7 @@ class TrickRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findQueryForPagination()
+    public function findQueryForTrickPagination()
     {
         $query = $this->_em->createQueryBuilder()
             ->select('e')

@@ -53,9 +53,14 @@ class User implements UserInterface
     private $newPass;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author")
      */
     private $tricks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="contributor")
+     */
+    private $modified_tricks;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
@@ -76,6 +81,7 @@ class User implements UserInterface
     public function __construct ()
     {
         $this->tricks = new ArrayCollection();
+        $this->modified_tricks = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -187,6 +193,11 @@ class User implements UserInterface
     public function getTricks ()
     {
         return $this->tricks;
+    }
+
+    public function getModifiedTricks ()
+    {
+        return $this->modified_tricks;
     }
 
     /**

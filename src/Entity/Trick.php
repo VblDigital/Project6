@@ -49,9 +49,15 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
-    private $user;
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="modified_tricks")
+     * @ORM\JoinColumn(name="contributor_id", referencedColumnName="id", nullable=false)
+     */
+    private $contributor;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
@@ -208,19 +214,39 @@ class Trick
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
-     * @param mixed $user
+     * @param $author
+     * @return mixed
      */
-    public function setUser ( $user )
+    public function setAuthor ( $author )
     {
-        $this->user = $user;
+        $this->author = $author;
 
-        return $user;
+        return $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContributor()
+    {
+        return $this->contributor;
+    }
+
+    /**
+     * @param $contributor
+     * @return mixed
+     */
+    public function setContributor ( $contributor )
+    {
+        $this->contributor = $contributor;
+
+        return $contributor;
     }
 
     /**

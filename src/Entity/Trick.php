@@ -55,7 +55,7 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="modified_tricks")
-     * @ORM\JoinColumn(name="contributor_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="contributor_id", referencedColumnName="id", nullable=true)
      */
     private $contributor;
 

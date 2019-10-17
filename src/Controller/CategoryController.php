@@ -19,7 +19,7 @@ class CategoryController extends CommunityController
      * @Route("/newcategory", name="new_category")
      * @Route("/category/{id}/edit", name="edit_category")
      */
-    public function categoryForm(Category $category, Request $request, ObjectManager $manager)
+    public function categoryForm(Category $category = null, Request $request, ObjectManager $manager)
     {
         if(!$category){
             $category = new Category();

@@ -15,7 +15,9 @@
             </div>
             <p>Dernière modification par {{ trick.contributor.username }} le {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
             </p>
-            {% include 'community/viewComments.html.twig' %}
+            {% include 'community/viewComments.html.twig' with {
+                'id': id
+                } %}
             <div>
                 {% if app.user %}
                     <h4>Nouveau commentaire</h4>

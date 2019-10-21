@@ -2,3 +2,8 @@ p.pt10
 {
     padding-top: 10px;
 }
+
+div.red
+{
+    color: red;
+}

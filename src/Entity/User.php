@@ -48,9 +48,17 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
      */
-    private $newPass;
+    private $passwordRequestedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author")
@@ -154,21 +162,38 @@ class User implements UserInterface
     }
 
     /**
-     * @return int|null
+     * @return \DateTimeInterface|null
      */
-    public function getNewPass(): ?int
+    public function getPasswordRequestedAt():?\DateTimeInterface
     {
-        return $this->newPass;
+        return $this->passwordRequestedAt;
     }
 
     /**
-     * @param int $newPass
-     * @return user
+     * @param \DateTimeInterface $passwordRequestedAt
+     * @return User
      */
-    public function setNewPass( int $newPass): self
+    public function setPasswordRequestedAt($passwordRequestedAt)
     {
-        $this->newPass = $newPass;
+        $this->passwordRequestedAt = $passwordRequestedAt;
+        return $this;
+    }
 
+    /**
+     * @return string|null
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return User
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
         return $this;
     }
 

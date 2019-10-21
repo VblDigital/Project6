@@ -50,7 +50,6 @@ class SecurityController extends CommunityController
 
     /**
      * @Route("/newpassword", name="password_recovery")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function request(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
     {
@@ -78,7 +77,7 @@ class SecurityController extends CommunityController
                 $entityManager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
-                return $this->redirectToRoute('login');
+                return $this->redirectToRoute('security_login');
             }
 
             $url = $this->generateUrl('reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
@@ -87,7 +86,7 @@ class SecurityController extends CommunityController
                 ->setFrom('no-reply@snowtricks.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "Cher Utilisateur,<br/>Une demande de réinitialisation de mot passe a été faite depuis votre compte Snowtricks.<br/>
+                    "Cher " . $user->getUsername() . ",<br/>Une demande de réinitialisation de mot passe a été faite depuis votre compte Snowtricks.<br/>
                     Afin de paramétrer un nouveau mot de passe, merci de cliquer ici :" . $url . ".<br/>A bientôt sur le site de Snowtricks.",
                     'text/html'
                 );
@@ -96,7 +95,7 @@ class SecurityController extends CommunityController
 
             $this->addFlash('notice', 'Un email vient d\'être envoyé.' );
 
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('security_login');
         }
 
         return $this->render('security/passwordRecovery.html.twig', [
@@ -156,7 +155,7 @@ class SecurityController extends CommunityController
 
             $this->addFlash('notice', 'Votre mot de passe a été mis à jour');
 
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('security_login');
         }else {
 
             return $this->render('security/passwordReset.html.twig', [
@@ -175,13 +174,13 @@ class SecurityController extends CommunityController
 
     /**
      * @Route("/logout", name="security_logout")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function logout() {}
 
     /**
      * @Route("/user/{id}", name="view_user")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function viewUser($id)
     {

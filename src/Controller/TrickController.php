@@ -26,7 +26,7 @@ class TrickController extends CommunityController
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {

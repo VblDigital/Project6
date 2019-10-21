@@ -20,7 +20,7 @@ class CategoryController extends CommunityController
     /**
      * @Route("/newcategory", name="new_category")
      * @Route("/category/{id}/edit", name="edit_category")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function categoryForm(Category $category = null, Request $request, ObjectManager $manager)
     {
@@ -48,7 +48,7 @@ class CategoryController extends CommunityController
 
     /**
      * @Route("/categories", name="view_categories")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function viewCategories()
     {

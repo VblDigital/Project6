@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class SecurityController
@@ -48,6 +50,7 @@ class SecurityController extends CommunityController
 
     /**
      * @Route("/newpassword", name="password_recovery")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function request(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
     {
@@ -172,11 +175,13 @@ class SecurityController extends CommunityController
 
     /**
      * @Route("/logout", name="security_logout")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function logout() {}
 
     /**
      * @Route("/user/{id}", name="view_user")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function viewUser($id)
     {

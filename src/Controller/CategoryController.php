@@ -8,6 +8,8 @@ use App\Form\CategoryType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class CategoryController
@@ -18,6 +20,7 @@ class CategoryController extends CommunityController
     /**
      * @Route("/newcategory", name="new_category")
      * @Route("/category/{id}/edit", name="edit_category")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function categoryForm(Category $category = null, Request $request, ObjectManager $manager)
     {
@@ -45,6 +48,7 @@ class CategoryController extends CommunityController
 
     /**
      * @Route("/categories", name="view_categories")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function viewCategories()
     {

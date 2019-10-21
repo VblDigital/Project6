@@ -7,8 +7,8 @@ use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class CommunityController
@@ -42,16 +42,6 @@ class CommunityController extends AbstractController
             'page' => $page,
             'pages' => $pages,
             'tricks' => $tricks
-        ]);
-    }
-
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login()
-    {
-        return $this->render('community/login.html.twig', [
-            'controller_name' => 'CommunityController',
         ]);
     }
 }

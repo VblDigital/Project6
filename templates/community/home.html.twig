@@ -19,7 +19,7 @@
                 <a href="/trick/{{ trick.id }}">Lire la suite ...</a>
                 </div>
                 <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
-                <p class="list-group-item">Créé par {{ trick.user.username }} || Catégorie : {{ trick.category.name }}
+                <p class="list-group-item">Créé par {{ trick.author.username }} || Catégorie : {{ trick.category.name }}
                 </p>
             </div>
         {% endfor %}

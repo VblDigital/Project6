@@ -20,16 +20,16 @@ class CommunityController extends AbstractController
      * @Route("/", name="home")
      * @Route("/page/{page}", name="list_page")
      */
-    public function home(Request $request, $page=1)
+    public function home($page=1)
     {
         /** @var EntityManager $em */
         $entityManager = $this->getDoctrine()->getManager();
 
-        /** @var TrickRepository $trickrepository */
-        $trickrepository = $entityManager->getRepository(Trick::class);
+        /** @var TrickRepository $trickRepository */
+        $trickRepository = $entityManager->getRepository(Trick::class);
 
         /** @var @ Query $query */
-        $query = $trickrepository->findQueryForPagination();
+        $query = $trickRepository->findQueryForTrickPagination();
 
         /** @var int $pages */
         $pages = PaginationHelper::getPagesCount($query);

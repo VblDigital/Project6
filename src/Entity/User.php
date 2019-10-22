@@ -48,14 +48,27 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
      */
-    private $newPass;
+    private $passwordRequestedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="user")
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author")
      */
     private $tricks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="contributor")
+     */
+    private $modified_tricks;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
@@ -76,6 +89,7 @@ class User implements UserInterface
     public function __construct ()
     {
         $this->tricks = new ArrayCollection();
+        $this->modified_tricks = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -148,21 +162,38 @@ class User implements UserInterface
     }
 
     /**
-     * @return int|null
+     * @return \DateTimeInterface|null
      */
-    public function getNewPass(): ?int
+    public function getPasswordRequestedAt():?\DateTimeInterface
     {
-        return $this->newPass;
+        return $this->passwordRequestedAt;
     }
 
     /**
-     * @param int $newPass
-     * @return user
+     * @param \DateTimeInterface $passwordRequestedAt
+     * @return User
      */
-    public function setNewPass( int $newPass): self
+    public function setPasswordRequestedAt($passwordRequestedAt)
     {
-        $this->newPass = $newPass;
+        $this->passwordRequestedAt = $passwordRequestedAt;
+        return $this;
+    }
 
+    /**
+     * @return string|null
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return User
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
         return $this;
     }
 
@@ -187,6 +218,11 @@ class User implements UserInterface
     public function getTricks ()
     {
         return $this->tricks;
+    }
+
+    public function getModifiedTricks ()
+    {
+        return $this->modified_tricks;
     }
 
     /**

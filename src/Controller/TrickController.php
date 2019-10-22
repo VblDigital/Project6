@@ -3,11 +3,15 @@
 
 namespace App\Controller;
 
+use App\AppBundle\Doctrine\PaginationHelper;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TrickType;
+use App\Repository\TrickRepository;
+use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,24 +27,43 @@ class TrickController extends CommunityController
      */
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
-        if(!$trick){
+        if(!$trick) {
             $trick = new Trick();
+
+            $form = $this->createForm(TrickType::class, $trick);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $trick
+                    ->setLastEditDate(new \DateTime())
+                    ->setAuthor($this->getUser());
+                $trick->setContributor($this->getUser());
+
+                $manager->persist($trick);
+                $manager->flush();
+
+                return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+            }
         }
 
-        $form = $this->createForm(TrickType::class, $trick);
+        else {
+            $form = $this->createForm(TrickType::class, $trick);
 
-        $form->handleRequest($request);
+            $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick
-                ->setLastEditDate(new \DateTime())
-                ->setUser($this->getUser());
+                $trick
+                    ->setLastEditDate(new \DateTime())
+                    ->setContributor($this->getUser());
 
-            $manager->persist($trick);
-            $manager->flush();
+                $manager->persist($trick);
+                $manager->flush();
 
-            return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+                return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+            }
         }
 
         return $this->render('community/newTrick.html.twig', [
@@ -51,11 +74,27 @@ class TrickController extends CommunityController
 
     /**
      * @Route("/trick/{id}", name="view_trick")
+     * @Route("/trick/{id}/page/{page}", name="list_page")
      */
-    public function viewTrick($id, Request $request, ObjectManager $manager)
+    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager, $page=1)
     {
+        /** @var EntityManager $em */
+        $entityManager = $this->getDoctrine()->getManager();
+
+        /** @var CommentRepository $commentRepository */
+        $commentRepository = $entityManager->getRepository(Comment::class);
+
+        /** @var @ Query $query */
+        $query = $commentRepository->findQueryForCommentPagination();
+
+        /** @var int $pages */
+        $pages = PaginationHelper::getPagesCount($query);
+
+        /** @var Comment[] $comments */
+        $comments = PaginationHelper::paginate($query, 2, $page);
+
         $repo = $this->getDoctrine()->getRepository(Trick::class);
-        $trick = $repo->find($id);
+        $trick = $repo->find($trick->getId());
 
         $comment = new Comment();
 
@@ -76,7 +115,11 @@ class TrickController extends CommunityController
 
         return $this->render('community/viewTrick.html.twig', [
             'trick' => $trick,
-            'formComment' => $form->createView()
+            'page' => $page,
+            'pages' => $pages,
+            'comments' => $comments,
+            'formComment' => $form->createView(),
+            'id' => $trick->getId()
         ]);
     }
 }

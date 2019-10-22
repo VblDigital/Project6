@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/3/superhero/bootstrap.min.css">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
         <script src="https://kit.fontawesome.com/b325145257.js" crossorigin="anonymous"></script>
-        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -15,9 +15,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ path('security_registration') }}">Créer un compte</a></li>
-
                         {% if not app.user %}
+                        <li class="active"><a href="{{ path('security_registration') }}">Créer un compte</a></li>
                         <li class="active"><a href="{{ path('security_login') }}">Se connecter</a></li>
                         {% else %}
                         <li class="active"><a href="{{ path('security_logout') }}">Se deconnecter</a></li>

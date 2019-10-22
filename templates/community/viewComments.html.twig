@@ -1,0 +1,19 @@
+{% block comment%}
+    <div class="list-group">
+        <h4>Les commentaires</h4>
+        {% if trick.comments is empty %}
+            <p>Publier le premier commentaire !</p>
+        {% else %}
+            {% for comment in trick.comments %}
+                <div>
+                    {{ comment.text | raw }}<br/>
+                    Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                    -------------------------------------------
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% include '/shared/pagination.html.twig' with {
+            'route': 'list_page'
+        } %}
+    </div>
+{% endblock %}

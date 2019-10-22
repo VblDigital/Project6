@@ -48,6 +48,11 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
@@ -159,6 +164,17 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    public function getRole() {
+        if (empty($this->role)) {
+            return ['ROLE_USER'];
+        }
+        return $this->role;
+    }
+
+    function addRole($role) {
+        $this->role[] = $role;
     }
 
     /**

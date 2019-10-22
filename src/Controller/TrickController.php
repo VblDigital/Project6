@@ -14,6 +14,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class TrickController
@@ -24,6 +26,7 @@ class TrickController extends CommunityController
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
@@ -74,7 +77,7 @@ class TrickController extends CommunityController
 
     /**
      * @Route("/trick/{id}", name="view_trick")
-     * @Route("/trick/{id}/page/{page}", name="list_page")
+     * @Route("/trick/{id}/page/{page}", name="comment_list_page")
      */
     public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager, $page=1)
     {
@@ -82,7 +85,7 @@ class TrickController extends CommunityController
         $entityManager = $this->getDoctrine()->getManager();
 
         /** @var CommentRepository $commentRepository */
-        $commentRepository = $entityManager->getRepository(Comment::class);
+        $commentRepository = $entityManager->getRepository(Comment::class)->findBy(['trick' => $trick] );
 
         /** @var @ Query $query */
         $query = $commentRepository->findQueryForCommentPagination();
@@ -91,7 +94,7 @@ class TrickController extends CommunityController
         $pages = PaginationHelper::getPagesCount($query);
 
         /** @var Comment[] $comments */
-        $comments = PaginationHelper::paginate($query, 2, $page);
+        $comments = PaginationHelper::paginate($query, 10, $page);
 
         $repo = $this->getDoctrine()->getRepository(Trick::class);
         $trick = $repo->find($trick->getId());

@@ -3,28 +3,78 @@
 {% block title %}SnowTricks{% endblock %}
 
 {% block body %}
-    <div class="jumbotron">
-        <h1>{{ title }}</h1>
-    </div>
-    {% include '/shared/pagination.html.twig' with {
-        'route': 'list_page'
-    } %}
-    <section class="list-group">
-        {% for trick in tricks %}
-            <div class="list-group">
-                <a href="/trick/{{ trick.id }}" class="list-group-item active">
-                    <h2>{{ trick.name }}</h2>
-                </a>
-                <div class="list-group-item">{{ trick.chapo | raw }}<br/>
-                <a href="/trick/{{ trick.id }}">Lire la suite ...</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{ asset('/img/banner/banner1.jpg')}}" alt="banner 1" />
+                            <div class="carousel-caption">
+                                <div class="black">
+                                    <h1>Bienvenue sur la communauté Snowtricks</h1>
+                                    <p class="title2">La première communauté des riders</p>
+                                </div>
+                                <a href="#tricks"><i class="fas fa-arrow-circle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="{{ asset('/img/banner/banner2.jpg')}}" alt="banner 2" />
+                            <div class="carousel-caption">
+                                <div class="black">
+                                    <h1>Bienvenue sur la communauté Snowtricks</h1>
+                                    <p class="title2">La première communauté des riders</p>
+                                </div>
+                                <a href="#tricks"><i class="fas fa-arrow-circle-down"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
-                <p class="list-group-item">Créé par {{ trick.author.username }} || Catégorie : {{ trick.category.name }}
-                </p>
             </div>
-        {% endfor %}
-    </section>
-    {% include '/shared/pagination.html.twig' with {
-        'route': 'list_page'
-    } %}
+        </div>
+        <div class="row">
+            {% for trick in tricks %}
+            <div class="blocTricks">
+                <div class="card mb-3 maxWidth">
+                    <span class="tricks-anchor" id="tricks"></span>
+                    <a href="/trick/{{ trick.id }}" class="list-group-item active">
+                        <h3 class="card-header">{{ trick.name }}</h3>
+                    </a>
+                    <img src="{{ trick.mainImageLink }}" alt="{{ trick.name }}" class="imageTrickHome"/>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ trick.chapo | raw }}<br/>
+                            <a href="/trick/{{ trick.id }}">Lire la suite ...</a><br/>
+
+                        </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Créé par <b>{{ trick.author.username }}</b> || Catégorie : <b>{{ trick.category.name }}</b>
+                            <div class="icone_right">
+                            {% if app.user %}
+                            <a href=""><i class="far fa-edit fa-1x"></i></a>
+                            <a href=""><i class="fas fa-trash-alt"></i></a>
+                            {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="right">
+            <a href="#top" class="up"><i class="fas fa-arrow-circle-up"></i></a>
+        </div>
+    </div>
+    <div>
+        {% include '/shared/pagination.html.twig' with {
+            'route': 'list_page'
+        } %}
+    </div>
 {% endblock %}

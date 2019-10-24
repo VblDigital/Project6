@@ -1,9 +1,464 @@
-p.pt10
+/* Yeti */
+
+.panel-body
+{
+    padding-left: 100px;
+}
+
+.jumbotron
+{
+    padding: unset;
+    margin: 0;
+}
+
+.jumbotron .container
+{
+    width: 100%;
+    padding: unset;
+}
+
+.navbar-default
+{
+    padding: unset;
+    margin: 0;
+}
+
+.blocTricks
+{
+    display: block;
+    padding: 10px;
+    width: 400px;
+}
+
+.fa-arrow-circle-down{
+    font-size: 5em;
+    float: right;
+    text-align: right;
+    margin: -50px -150px 50px;
+}
+
+.fa-arrow-circle-up{
+    font-size: 5em;
+    background-position: right;
+}
+
+.fa-sign-out-alt:before
+{
+    display: none;
+}
+
+h2
+{
+    font-weight: bold;
+}
+
+h4.underline
+{
+    font-variant: titling-caps;
+}
+
+.infos
+{
+    font-size: 15px;
+    font-style: oblique;
+    padding: 0 0 10px 0;
+}
+
+.titleDescriptionTrick
+{
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.imageTrickHome
+{
+    align-self: center;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.imageTrick
+{
+    align-self: center;
+    display: block;
+    max-width: 500px;
+}
+
+.icone_right
+{
+    float: right;
+}
+
+.card-body
+{
+    height: 150px;
+}
+
+.card
+{
+    margin: auto;
+}
+
+.galery
+{
+    display: none;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
+.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
+.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
+.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
+.col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
+.col-xl-auto {
+    padding: 0;
+}
+
+div.row
+{
+    margin: auto;
+}
+
+.maxWidth
+{
+    max-width: 25em;
+}
+
+/* Paragraph */
+.pt10
 {
     padding-top: 10px;
 }
 
+.pt20
+{
+    padding-top: 20px;
+}
+
+p.title2
+{
+    font-size: 30px;
+}
+
+/* DIV */
 div.red
 {
     color: red;
+}
+
+div.container
+{
+    min-width: 100%;
+}
+
+div.black
+{
+    color: #000;
+}
+
+div.right
+{
+    text-align: right;
+}
+
+.footer
+{
+    font-size: large;
+    text-align: center;
+}
+
+.footer_icone
+{
+    text-align: right;
+}
+
+i.right
+{
+    position: relative;
+}
+
+p.footer_icone
+{
+    display: none;
+}
+
+a.up
+{
+    display: none;
+}
+
+.backgroundImage {
+    position: relative;
+    width: max-content;
+    overflow: hidden;
+    margin: auto;
+}
+
+.backgroundImage .block
+{
+    display: block;
+}
+
+.backgroundImageTitle {
+    position: absolute;
+    right: 15%;
+    bottom: 10px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.galery
+{
+    display: none;
+}
+
+.galery_sm
+{
+    display: none;
+}
+
+/*@media*/
+
+@media screen and (min-width: 1024px) {
+    a.up
+    {
+        display: block;
+    }
+    
+    .galery
+    {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 1023.99px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    p.title2 {
+        font-size: 15px;
+    }
+
+    .carousel-caption {
+        position: absolute;
+        right: 15%;
+        bottom: 20px;
+        left: 15%;
+        z-index: 10;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .panel-body {
+        padding-left: 50px;
+    }
+
+    .fa-arrow-circle-down {
+        font-size: 3em;
+        float: inside;
+        margin: -20px -20px -20px;
+    }
+
+    .fa-sign-out-alt:before
+    {
+        display: block;
+    }
+
+    p.footer_icone
+    {
+        display: block;
+    }
+
+    .galery_sm
+    {
+        display: block;
+    }
+}
+
+/* Carousel */
+.carousel {
+    position: relative;
+}
+
+.carousel.pointer-event {
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: -webkit-transform 0.6s ease-in-out;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+    display: block;
+}
+
+.carousel-item-next:not(.carousel-item-left),
+.active.carousel-item-right {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-right),
+.active.carousel-item-left {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    -webkit-transform: none;
+    transform: none;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right {
+    z-index: 1;
+    opacity: 1;
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+    z-index: 0;
+    opacity: 0;
+    transition: 0s 0.6s opacity;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+}
+
+.carousel-control-prev:hover, .carousel-control-prev:focus,
+.carousel-control-next:hover,
+.carousel-control-next:focus {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    opacity: 0.9;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: no-repeat 50% / 100% 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+}
+
+.carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+}
+
+.carousel-indicators li {
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 30px;
+    height: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity 0.6s ease;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 50px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Image */
+.d-block {
+    display: block !important;
+}
+
+.w-100 {
+    width: 100% !important;
 }

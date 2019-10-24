@@ -1,0 +1,13 @@
+{% block body %}
+    <span class="d-block p-2 bg-dark text-white footer">
+        {% if app.user %}
+        <p class="footer_icone">
+            <a href="{{ path('security_logout') }}">
+                <i class="fas fa-sign-out-alt right">
+                </i>
+            </a>
+        </p>
+        {% endif %}
+        <p>Copyright <a href="http://www.valeriebleser.fr">Valérie Bleser</a></p>
+    </span>
+{% endblock %}

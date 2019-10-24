@@ -5,20 +5,34 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-body">
-            <h2>{{ trick.name }}</h2>
-            <div>Créé par {{ trick.author.username }}</div>
-            <div>{{ trick.description | raw }}</div>
-            <div>
-                {% if trick.imageLink is not empty %}
-                    <img src="{{ trick.imageLink }}" alt="{{ trick.name }}"/>
-                {% endif %}
+            <div class="backgroundImage">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{ trick.mainImageLink}}" alt="banner 1" />
+                    <div class="backgroundImageTitle">
+                        <div class="black">
+                            <h1>{{ trick.name }}</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>Dernière modification par {{ trick.contributor.username }} le {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
-            </p>
-            {% include 'community/viewComments.html.twig' with {
-                'id': id
-                } %}
-            <div>
+            <div class="galery">
+                <h3>Galerie</h3>
+                <i>Les images et les vidéos</i>
+            </div>
+            <div class="galery_sm">
+                <h3>Galerie</h3>
+                <i>Bouton</i>
+            </div>
+            <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
+                <div class="titleDescriptionTrick">Description du Trick : </div>
+                <div>{{ trick.description | raw }}</div>
+            </div>
+            <div class="infos pt20">
+                Créé par {{ trick.author.username }}<br/>
+                Dernière modification par {{ trick.contributor.username }} le
+                    {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
+            </div>
+            <div class="card border-secondary mb-3" style="max-width: 58rem;">
                 {% if app.user %}
                     <h4>Nouveau commentaire</h4>
 
@@ -37,10 +51,13 @@
                     <h5>Il faut vous <a href="{{ path('security_login') }}">connecter</a> pour modifier le Trick ou insérer un commentaire.</h5>
                 {% endif %}
             </div>
+            <div>
+                {% include 'community/viewComments.html.twig' %}
+            </div>
             {% if app.user %}
             <p class="pt10">
-                <a href="/trick/{{ trick.id }}id}/edit">
-                    <i class="far fa-edit fa-2x"></i>Modifier le Trick</a>
+                <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-2x"></i></a>
+                <a href=""><i class="fas fa-trash-alt fa-2x"></i></a>
             </p>
             {% endif %}
             <p><a href="/">Retour</a></p>

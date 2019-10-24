@@ -19,6 +19,7 @@
             <label for="password">Mot de passe</label>
             <input type="password" class="form-control" id="password" name="_password">
         </div>
+        <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}"/>
         <div><button type="submit" class="btn btn-primary">Se connecter</button></div><br/>
         <div><a href="{{ path('password_recovery')}}">Mot de passe oublié ?</a></div>
     </form>

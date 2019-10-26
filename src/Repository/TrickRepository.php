@@ -4,8 +4,15 @@ namespace App\Repository;
 
 use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use http\Env\Request;
+use http\QueryString;
+use Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentValueResolver\Psr7ServerRequestResolver;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 /**
  * @method Trick|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,7 +23,6 @@ use Doctrine\ORM\Query;
 class TrickRepository extends ServiceEntityRepository
 {
     /**
-     * TrickRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct( ManagerRegistry $registry)
@@ -25,14 +31,24 @@ class TrickRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Query
+     * @param int $page
+     * @param int $maxPerPage
+     *
+     * @return Paginator
      */
-    public function findQueryForTrickPagination()
+    public function findAllForPaginateAndSort($page, $maxPerPage)
     {
-        $query = $this->_em->createQueryBuilder()
-            ->select('e')
-            ->from($this->getEntityName(), 'e')
-            ->getQuery();
-        return $query;
+        if ($page >= 1) {
+            $trickResults = ($page*$maxPerPage) - $maxPerPage;
+        }
+
+        $qb = $this->createQueryBuilder('t')
+            ->orderBy('t.created_date', 'DESC')
+            ->setFirstResult($trickResults)
+            ->setMaxResults($maxPerPage);
+
+        $pagination = new Paginator($qb);
+
+        return $pagination;
     }
 }

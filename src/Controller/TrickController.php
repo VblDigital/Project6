@@ -85,10 +85,11 @@ class TrickController extends CommunityController
         $entityManager = $this->getDoctrine()->getManager();
 
         /** @var CommentRepository $commentRepository */
-        $commentRepository = $entityManager->getRepository(Comment::class)->findBy(['trick' => $trick] );
+        $commentRepository = $entityManager->getRepository(Comment::class);
 
         /** @var @ Query $query */
         $query = $commentRepository->findQueryForCommentPagination();
+
 
         /** @var int $pages */
         $pages = PaginationHelper::getPagesCount($query);

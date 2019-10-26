@@ -1,27 +1,27 @@
 {% block pagination %}
-    <div>
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, {page : paginationLinks.firstPage}) }}">&laquo;</a>
+        </li>
+        {% if page <=1 %}
             <li class="page-item">
-                <a class="page-link" href="#">2</a>
+                <a class="page-link" href="{{ path(route, {page : paginationLinks.firstPage}) }}">&laquo;</a>
             </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
-    </div>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, {page : page - 1}) }}">&lsaquo;</a>
+        {% endif %}
+        </li>
+        {% for x in paginationLinks.firstPage..paginationLinks.lastPage %}
+        <li class="page-item active">
+            <a class="page-link" href="{{ path(route, {page : x}) }}">{{ x }}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item">
+            <a class="page-link" href="/page={{ page + 1 }}">&rsaquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, {page : paginationLinks.lastPage}) }}">&raquo;</a>
+        </li>
+    </ul>
 {% endblock %}

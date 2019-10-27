@@ -1,27 +1,33 @@
 {% block pagination %}
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" href="{{ path(route, {page : paginationLinks.firstPage}) }}">&laquo;</a>
+            <a class="page-link" href="?page={{ paginationLinks.firstPage }}"><i class="fas fa-angle-double-left"></i></a>
         </li>
-        {% if page <=1 %}
+        {% if paginationLinks.previousPage < 1 %}
             <li class="page-item">
-                <a class="page-link" href="{{ path(route, {page : paginationLinks.firstPage}) }}">&laquo;</a>
+                <a class="page-link" href="?page={{ paginationLinks.firstPage }}"><i class="fas fa-angle-left"></i></a>
             </li>
         {% else %}
-        <li class="page-item">
-            <a class="page-link" href="{{ path(route, {page : page - 1}) }}">&lsaquo;</a>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paginationLinks.previousPage }}"><i class="fas fa-angle-left"></i></a>
+            </li>
         {% endif %}
-        </li>
         {% for x in paginationLinks.firstPage..paginationLinks.lastPage %}
-        <li class="page-item active">
-            <a class="page-link" href="{{ path(route, {page : x}) }}">{{ x }}</a>
-        </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ x }}">{{ x }}</a>
+            </li>
         {% endfor %}
+        {% if paginationLinks.nextPage > paginationLinks.lastPage %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paginationLinks.lastPage }}"><i class="fas fa-angle-right"></i></a>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paginationLinks.nextPage }}"><i class="fas fa-angle-right"></i></a>
+            </li>
+        {% endif %}
         <li class="page-item">
-            <a class="page-link" href="/page={{ page + 1 }}">&rsaquo;</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="{{ path(route, {page : paginationLinks.lastPage}) }}">&raquo;</a>
+            <a class="page-link" href="?page={{ paginationLinks.lastPage }}"><i class="fas fa-angle-double-right"></i></a>
         </li>
     </ul>
 {% endblock %}

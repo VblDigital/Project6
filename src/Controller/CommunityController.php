@@ -18,12 +18,13 @@ class CommunityController extends AbstractController
 {
     /**
      * @Route("/", name="home")
-     * @Route("/page={page}", name="list_page")
      */
-    public function home ($page=1)
+    public function home (Request $request)
     {
         $maxPerPage = 10;
-        $route = 'list_page';
+        $route = 'home';
+        $page = (int) $request->query->get ('page', 1);
+        $firstPage = (int) $request->query->get('firstPage', 1);
 
         /** @var EntityManager $em */
         $entityManager = $this->getDoctrine()->getManager();
@@ -41,8 +42,10 @@ class CommunityController extends AbstractController
         $tricks = $trickRepository->findAllForPaginateAndSort($page, $maxPerPage);
 
         $paginationLinks = array(
-            'firstPage' => 1,
+            'firstPage' => $firstPage,
             'lastPage' => $pages,
+            'nextPage' => ($page + 1),
+            'previousPage' => ($page -1)
         );
 
         return $this->render('community/home.html.twig', [

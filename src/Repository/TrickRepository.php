@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use http\Env\Request;
-use http\QueryString;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentValueResolver\Psr7ServerRequestResolver;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -38,16 +36,18 @@ class TrickRepository extends ServiceEntityRepository
      */
     public function findAllForPaginateAndSort($page, $maxPerPage)
     {
-        if ($page >= 1) {
-            $trickResults = ($page*$maxPerPage) - $maxPerPage;
+        if ($page <= 1) {
+            $page = 1;
         }
 
-        $qb = $this->createQueryBuilder('t')
+        $trickResults = ($page*$maxPerPage) - $maxPerPage;
+
+        $query = $this->createQueryBuilder('t')
             ->orderBy('t.created_date', 'DESC')
             ->setFirstResult($trickResults)
             ->setMaxResults($maxPerPage);
 
-        $pagination = new Paginator($qb);
+        $pagination = new Paginator($query);
 
         return $pagination;
     }

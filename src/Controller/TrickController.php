@@ -3,12 +3,10 @@
 
 namespace App\Controller;
 
-use App\AppBundle\Doctrine\PaginationHelper;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TrickType;
-use App\Repository\TrickRepository;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
@@ -78,13 +76,12 @@ class TrickController extends CommunityController
     /**
      * @Route("/trick/{id}", name="view_trick")
      */
-    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager, $id)
+    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager)
     {
         $maxPerPage = 10;
         $route = 'view_trick';
         $id = $trick->getId();
         $page = (int) $request->query->get ('page', 1);
-        $firstPage = (int) $request->query->get('firstPage', 1);
 
         /** @var EntityManager $em */
         $entityManager = $this->getDoctrine()->getManager();
@@ -92,13 +89,10 @@ class TrickController extends CommunityController
         /** @var CommentRepository $commentRepository */
         $commentRepository = $entityManager->getRepository(Comment::class);
 
-        /** @var int $commentsCount */
         $commentsCount = count($commentRepository->findAll());
-
-        /** @var int $pages */
         $pages = ceil($commentsCount/$maxPerPage);
 
-        /** @var @ Tricks [] */
+        /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
 
         $repo = $this->getDoctrine()->getRepository(Trick::class);
@@ -122,7 +116,7 @@ class TrickController extends CommunityController
         }
 
         $paginationLinks = array(
-            'firstPage' => $firstPage,
+            'firstPage' => '1',
             'lastPage' => $pages,
             'nextPage' => ($page + 1),
             'previousPage' => ($page -1)

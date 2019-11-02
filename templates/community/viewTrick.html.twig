@@ -7,7 +7,7 @@
         <div class="panel-body">
             <div class="backgroundImage">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ trick.mainImageLink}}" alt="banner 1" />
+                    <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ trick.mainImageLink) }}" alt="{{ trick.mainImageLink }}" />
                     <div class="backgroundImageTitle">
                         <div class="black">
                             <h1>{{ trick.name }}</h1>
@@ -54,11 +54,11 @@
             <div>
                 {% include 'community/viewComments.html.twig' %}
             </div>
-            <div>
-                {% include '/shared/pagination.html.twig' with {
-                    'id' : trick.id
-                } %}
-            </div>
+{#            <div>#}
+{#                {% include '/shared/Pagination.html.twig' with {#}
+{#                    'id' : trick.id#}
+{#                } %}#}
+{#            </div>#}
             {% if app.user %}
             <p class="pt10">
                 <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-2x"></i></a>

@@ -10,6 +10,8 @@ use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -29,18 +31,17 @@ class TrickController extends CommunityController
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
         if(!$trick) {
+
             $trick = new Trick();
-
             $form = $this->createForm(TrickType::class, $trick);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $trick
                     ->setLastEditDate(new \DateTime())
-                    ->setAuthor($this->getUser());
-                $trick->setContributor($this->getUser());
+                    ->setAuthor($this->getUser())
+                    ->setContributor($this->getUser());
 
                 $manager->persist($trick);
                 $manager->flush();
@@ -48,7 +49,6 @@ class TrickController extends CommunityController
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
-
         else {
             $form = $this->createForm(TrickType::class, $trick);
 
@@ -80,7 +80,6 @@ class TrickController extends CommunityController
     {
         $maxPerPage = 10;
         $route = 'view_trick';
-        $id = $trick->getId();
         $page = (int) $request->query->get ('page', 1);
 
         /** @var EntityManager $em */
@@ -112,7 +111,7 @@ class TrickController extends CommunityController
             $manager->persist($comment);
             $manager->flush();
 
-            return $this->redirectToRoute('view_trick', ['id' => $id]);
+            return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
         }
 
         $paginationLinks = array(
@@ -129,7 +128,7 @@ class TrickController extends CommunityController
             'comments' => $comments,
             'formComment' => $form->createView(),
             'paginationLinks' => $paginationLinks,
-            'id' => $id,
+            'id' => $trick->getId(),
             'route' => $route
         ]);
     }

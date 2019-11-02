@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
+use App\Service\Pagination\PaginationHelper;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
  * Class CommunityController
@@ -19,10 +22,9 @@ class CommunityController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home (Request $request)
+    public function home (Request $request, Router $router)
     {
         $maxPerPage = 10;
-        $route = 'home';
         $page = (int) $request->query->get ('page', 1);
 
         /** @var EntityManager $em */
@@ -37,19 +39,12 @@ class CommunityController extends AbstractController
         /** @var Trick [] */
         $tricks = $trickRepository->findAllForPaginateAndSort($page, $maxPerPage);
 
-        $paginationLinks = array(
-            'firstPage' => '1',
-            'lastPage' => $pages,
-            'nextPage' => ($page + 1),
-            'previousPage' => ($page -1)
-        );
+        $paginationHelper = new PaginationHelper();
+        dd($paginationHelper->getUrl($router, $page, $pages));
 
         return $this->render('community/home.html.twig', [
-            'pages' => $pages,
-            'page' => $page,
-            'tricks' => $tricks,
-            'paginationLinks' => $paginationLinks,
-            'route' => $route
+            'paginationHelper' => $paginationHelper,
+            'tricks' => $tricks
         ]);
     }
 }

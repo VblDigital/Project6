@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Trick;
@@ -31,48 +30,36 @@ class TrickController extends CommunityController
     public function trickForm(Trick $trick = null, Request $request, ObjectManager $manager)
     {
         if(!$trick) {
-
             $trick = new Trick();
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $trick
                     ->setLastEditDate(new \DateTime())
                     ->setAuthor($this->getUser())
                     ->setContributor($this->getUser());
-
                 $manager->persist($trick);
                 $manager->flush();
-
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
         else {
             $form = $this->createForm(TrickType::class, $trick);
-
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $trick
                     ->setLastEditDate(new \DateTime())
                     ->setContributor($this->getUser());
-
                 $manager->persist($trick);
                 $manager->flush();
-
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
-
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
             'editMode' => $trick->getId() !== null
         ]);
     }
-
     /**
      * @Route("/trick/{id}", name="view_trick")
      */
@@ -100,17 +87,14 @@ class TrickController extends CommunityController
         $comment = new Comment();
 
         $form = $this->createForm(CommentType::class, $comment);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime())
-                    ->setTrick($trick)
-                    ->setUser($this->getUser());
-
+                ->setTrick($trick)
+                ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
-
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
         }
 

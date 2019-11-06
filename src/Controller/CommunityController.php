@@ -17,13 +17,18 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  */
 class CommunityController extends AbstractController
 {
+    private $paginationHelper;
+
+    public function __construct (PaginationHelper $paginationHelper)
+    {
+        $this->paginationHelper = $paginationHelper;
+    }
+
     /**
      * @Route("/", name="home")
      */
     public function home (Request $request, TrickRepository $trickRepository)
     {
-        $router = $this->get('router');
-
         $maxPerPage = 10;
         $page = (int) $request->query->get ('page', 1);
 
@@ -33,9 +38,7 @@ class CommunityController extends AbstractController
         /** @var Trick [] */
         $tricks = $trickRepository->findAllForPaginateAndSort($page, $maxPerPage);
 
-        /** @var Router $router */
-        $paginationHelper = new PaginationHelper($router);
-        $paginationLinks = $paginationHelper->getUrl($page, $pages);
+        $paginationLinks = $this->paginationHelper->getUrl($page, $pages);
 
         return $this->render('community/home.html.twig', [
             'paginationLinks' => $paginationLinks,

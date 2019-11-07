@@ -20,6 +20,11 @@ class Trick
     /**
      * @ORM\Column(type="datetime")
      */
+    private $created_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
     private $last_edit_date;
 
     /**
@@ -38,14 +43,9 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $imageLink;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $videoLink;
+    private $mainImageLink;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
@@ -93,6 +93,25 @@ class Trick
     public function setId( string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getCreatedDate():?\DateTimeInterface
+    {
+        return $this->created_date;
+    }
+
+    /**
+     * @param \DateTimeInterface $created_date
+     * @return Trick
+     */
+    public function setCreatedDate( \DateTimeInterface $created_date)
+    {
+        $this->created_date = $created_date;
 
         return $this;
     }
@@ -176,37 +195,18 @@ class Trick
     /**
      * @return string|null
      */
-    public function getImageLink(): ?string
+    public function getMainImageLink(): ?string
     {
-        return $this->imageLink;
+        return $this->mainImageLink;
     }
 
     /**
-     * @param string|null $imageLink
+     * @param string|null $mainImageLink
      * @return Trick
      */
-    public function setImageLink( ?string $imageLink): self
+    public function setMainImageLink( ?string $mainImageLink): self
     {
-        $this->imageLink = $imageLink;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getVideoLink(): ?string
-    {
-        return $this->videoLink;
-    }
-
-    /**
-     * @param string|null $videoLink
-     * @return Trick
-     */
-    public function setVideoLink( ?string $videoLink): self
-    {
-        $this->videoLink = $videoLink;
+        $this->mainImageLink = $mainImageLink;
 
         return $this;
     }

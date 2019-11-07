@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
-use App\Service\Pagination\PaginationHelper;
+use App\Service\PaginationHelper;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

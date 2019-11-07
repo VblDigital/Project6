@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,13 +25,26 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function findQueryForCommentPagination()
+    /**
+     * @param int $page
+     * @param int $maxPerPage
+     *
+     * @return Paginator
+     */
+    public function findAllCommentsForPaginateAndSort($page, $maxPerPage)
     {
-        $query = $this->_em->createQueryBuilder()
-            ->select('e')
-            ->from($this->getEntityName(), 'e')
-            ->orderBy('e.date', 'DESC')
-            ->getQuery();
-        return $query;
+        if ($page <= 1) {
+            $page = 1;
+        }
+        $commentsResults = ($page*$maxPerPage) - $maxPerPage;
+
+        $query = $this->createQueryBuilder('c')
+            ->orderBy('c.date', 'DESC')
+            ->setFirstResult($commentsResults)
+            ->setMaxResults($maxPerPage);
+
+        $pagination = new Paginator($query);
+
+        return $pagination;
     }
 }

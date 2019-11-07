@@ -1,27 +1,33 @@
 {% block pagination %}
-    <div>
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">&laquo;</a>
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="{{ paginationLinks.firstPage }}"><i class="fas fa-angle-double-left"></i></a>
+        </li>
+        {% if paginationLinks.previousPage < 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ paginationLinks.firstPage }}"><i class="fas fa-angle-left"></i></a>
             </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link" href="{{ paginationLinks.previousPage }}"><i class="fas fa-angle-left"></i></a>
+            </li>
+        {% endif %}
+        {% for x in 1..paginationLinks.pages %}
             <li class="page-item active">
-                <a class="page-link" href="#">1</a>
+                <a class="page-link" href="{{ path('home', {'page': x }) }}">{{ x }}</a>
             </li>
+        {% endfor %}
+        {% if paginationLinks.nextPage > paginationLinks.lastPage %}
             <li class="page-item">
-                <a class="page-link" href="#">2</a>
+                <a class="page-link" href="{{ paginationLinks.lastPage }}"><i class="fas fa-angle-right"></i></a>
             </li>
+        {% else %}
             <li class="page-item">
-                <a class="page-link" href="#">3</a>
+                <a class="page-link" href="{{ paginationLinks.nextPage }}"><i class="fas fa-angle-right"></i></a>
             </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
-    </div>
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="{{ paginationLinks.lastPage }}"><i class="fas fa-angle-double-right"></i></a>
+        </li>
+    </ul>
 {% endblock %}

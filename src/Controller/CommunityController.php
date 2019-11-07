@@ -1,14 +1,15 @@
 <?php
-
 namespace App\Controller;
 
-use App\AppBundle\Doctrine\PaginationHelper;
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
+use App\Service\Pagination\PaginationHelper;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
  * Class CommunityController
@@ -16,31 +17,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class CommunityController extends AbstractController
 {
+    private $paginationHelper;
+
+    public function __construct (PaginationHelper $paginationHelper)
+    {
+        $this->paginationHelper = $paginationHelper;
+    }
+
     /**
      * @Route("/", name="home")
-     * @Route("/page/{page}", name="list_page")
      */
-    public function home($page=1)
+    public function home (Request $request, TrickRepository $trickRepository)
     {
-        /** @var EntityManager $em */
-        $entityManager = $this->getDoctrine()->getManager();
+        $maxPerPage = 10;
+        $page = (int) $request->query->get ('page', 1);
 
-        /** @var TrickRepository $trickRepository */
-        $trickRepository = $entityManager->getRepository(Trick::class);
+        $tricksCount = count($trickRepository->findAll());
+        $pages = ceil($tricksCount/$maxPerPage);
 
-        /** @var @ Query $query */
-        $query = $trickRepository->findQueryForTrickPagination();
+        /** @var Trick [] */
+        $tricks = $trickRepository->findAllForPaginateAndSort($page, $maxPerPage);
 
-        /** @var int $pages */
-        $pages = PaginationHelper::getPagesCount($query);
-
-        /** @var Trick[] $tricks */
-        $tricks = PaginationHelper::paginate($query, 10, $page);
+        $paginationLinks = $this->paginationHelper->getUrl($page, $pages);
 
         return $this->render('community/home.html.twig', [
-            'title' => "Salut les Snowboarders !",
-            'page' => $page,
-            'pages' => $pages,
+            'paginationLinks' => $paginationLinks,
             'tricks' => $tricks
         ]);
     }

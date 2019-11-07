@@ -12,11 +12,19 @@
                 <a class="page-link" href="{{ paginationLinks.previousPage }}"><i class="fas fa-angle-left"></i></a>
             </li>
         {% endif %}
-        {% for x in 1..paginationLinks.pages %}
-            <li class="page-item active">
-                <a class="page-link" href="{{ path('home', {'page': x }) }}">{{ x }}</a>
-            </li>
-        {% endfor %}
+        {% if route is same as("home") %}
+            {% for x in 1..paginationLinks.pages %}
+                <li class="page-item active">
+                    <a class="page-link" href="{{ path('home', {'page': x }) }}">{{ x }}</a>
+                </li>
+            {% endfor %}
+        {% elseif route is same as("view_trick") %}
+            {% for x in 1..paginationLinks.pages %}
+                <li class="page-item active">
+                    <a class="page-link" href="{{ path('view_trick', {'id': trick.id}, {'page': x }) }}">{{ x }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
         {% if paginationLinks.nextPage > paginationLinks.lastPage %}
             <li class="page-item">
                 <a class="page-link" href="{{ paginationLinks.lastPage }}"><i class="fas fa-angle-right"></i></a>

@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
+use App\Service\PaginationHelper;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -22,6 +23,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class TrickController extends CommunityController
 {
+    private $paginationHelper;
+
+    public function __construct (PaginationHelper $paginationHelper)
+    {
+        $this->paginationHelper = $paginationHelper;
+    }
+
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
@@ -63,17 +71,10 @@ class TrickController extends CommunityController
     /**
      * @Route("/trick/{id}", name="view_trick")
      */
-    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager)
+    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager, CommentRepository $commentRepository)
     {
         $maxPerPage = 10;
-        $route = 'view_trick';
         $page = (int) $request->query->get ('page', 1);
-
-        /** @var EntityManager $em */
-        $entityManager = $this->getDoctrine()->getManager();
-
-        /** @var CommentRepository $commentRepository */
-        $commentRepository = $entityManager->getRepository(Comment::class);
 
         $commentsCount = count($commentRepository->findAll());
         $pages = ceil($commentsCount/$maxPerPage);
@@ -81,8 +82,7 @@ class TrickController extends CommunityController
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
 
-        $repo = $this->getDoctrine()->getRepository(Trick::class);
-        $trick = $repo->find($trick->getId());
+        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
 
@@ -98,22 +98,12 @@ class TrickController extends CommunityController
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
         }
 
-        $paginationLinks = array(
-            'firstPage' => '1',
-            'lastPage' => $pages,
-            'nextPage' => ($page + 1),
-            'previousPage' => ($page -1)
-        );
-
         return $this->render('community/viewTrick.html.twig', [
             'trick' => $trick,
-            'page' => $page,
-            'pages' => $pages,
             'comments' => $comments,
             'formComment' => $form->createView(),
             'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
-            'route' => $route
         ]);
     }
 }

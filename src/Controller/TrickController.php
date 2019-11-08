@@ -42,10 +42,25 @@ class TrickController extends CommunityController
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                $file = $request->files->get('trick')['mainImageLink'];
+                $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
+
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+                $file->move(
+                    $mainImage_uploads_directory,
+                    $filename
+                );
+
                 $trick
+                    ->setCreatedDate(new \DateTime())
                     ->setLastEditDate(new \DateTime())
-                    ->setAuthor($this->getUser())
-                    ->setContributor($this->getUser());
+                    ->setMainImageLink($filename)
+                    ->setAuthor($this->getUser());
+                $trick->setContributor($this->getUser());
+
+
                 $manager->persist($trick);
                 $manager->flush();
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);

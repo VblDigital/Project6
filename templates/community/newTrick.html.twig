@@ -14,23 +14,32 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <p>Auteur: {{ app.user.username }}</p>
             {% endif %}
+            <div class="col-sm-2 col-md-5">
             {{ form_start(formTrick) }}
 
-            {{ form_row(formTrick.name, {'label': 'Nom' }) }}
-            {{ form_row(formTrick.chapo, {'label': 'Chapo' }) }}
-            {{ form_row(formTrick.description, {'label': 'Description' }) }}
-            {{ form_row(formTrick.category, {'label' : 'Catégorie'}) }}
-            {{ form_row(formTrick.mainImage, {'label': 'Lien vers l\'image principale' }) }}
+            {{ form_label(formTrick.name, "Nom") }}
+            {{ form_widget(formTrick.name) }}
+            {{ form_label(formTrick.chapo, "Chapo") }}
+            {{ form_widget(formTrick.chapo) }}
+            {{ form_label(formTrick.chapo, "Decription") }}
+            {{ form_widget(formTrick.description) }}
+            {{ form_label(formTrick.category, "Catégorie") }}
+            {{ form_widget(formTrick.category) }}
+            {{ form_label(formTrick.mainImageLink, "Image principale") }}
+            {{ form_widget(formTrick.mainImageLink) }}
 
-            <button type="submit" class="btn btn-primary">
+            <div class="pt10 pb10">
+                <button type="submit" class="btn btn-primary">
                 {% if editMode %}
                     Enregistrer
                 {% else %}
                     Créer le Trick
                 {% endif %}
-            </button>
+                </button>
+            </div>
 
             {{ form_end(formTrick) }}
+            </div>
         </div>
     </div>
 {% endblock %}

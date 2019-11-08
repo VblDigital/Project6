@@ -40,7 +40,7 @@
                     <a href="/trick/{{ trick.id }}" class="list-group-item active">
                         <h3 class="card-header">{{ trick.name }}</h3>
                     </a>
-                    <img src="{{ trick.mainImageLink }}" alt="{{ trick.name }}" class="imageTrickHome"/>
+                    <img src="{{ asset('img/trickMainImage/' ~ trick.mainImageLink) }}" alt="{{ trick.name }}" class="imageTrickHome"/>
                     <div class="card-body">
                         <p class="card-text">
                             {{ trick.chapo | raw }}<br/>

@@ -43,7 +43,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column(type="file", length=255, nullable=false)
+     * @ORM\Column
      */
     private $mainImageLink;
 

@@ -6,7 +6,7 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Form\NewTrickType;
+use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
@@ -31,7 +31,7 @@ class TrickController extends CommunityController
         if(!$trick) {
             $trick = new Trick();
 
-            $form = $this->createForm(NewTrickType::class, $trick);
+            $form = $this->createForm(TrickType::class, $trick);
 
             $form->handleRequest($request);
 

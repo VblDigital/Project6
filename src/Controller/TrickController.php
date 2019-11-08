@@ -6,7 +6,7 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Form\TrickType;
+use App\Form\NewTrickType;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
@@ -31,14 +31,26 @@ class TrickController extends CommunityController
         if(!$trick) {
             $trick = new Trick();
 
-            $form = $this->createForm(TrickType::class, $trick);
+            $form = $this->createForm(NewTrickType::class, $trick);
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
 
+                $file = $request->files->get('trick')['mainImageLink'];
+                $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
+
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+                $file->move(
+                    $mainImage_uploads_directory,
+                    $filename
+                );
+
                 $trick
+                    ->setCreatedDate(new \DateTime())
                     ->setLastEditDate(new \DateTime())
+                    ->setMainImageLink($filename)
                     ->setAuthor($this->getUser());
                 $trick->setContributor($this->getUser());
 

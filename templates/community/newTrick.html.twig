@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'un trick{% endblock %}
+{% block title %}Edition d'un trick{% endblock %}
 
 {% block body %}
-    <div class="panel panel-default">
+    <div class="form-group row">
         <div class="panel-body">
-            <h2>Création d'un trick</h2>
+            {% if editMode %}
+                <h2>Modification d'un trick</h2>
+            {% else %}
+                <h2>Création d'un trick</h2>
+            {% endif %}
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <p>Auteur: {{ app.user.username }}</p>

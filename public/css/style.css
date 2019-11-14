@@ -69,6 +69,14 @@ label
     padding: 10px;
 }
 
+.custom-file-input ~ .custom-file-label::after {
+    content: "Choisir une image";
+}
+
+.custom-file-control.selected:lang(en)::after {
+    content: "" !important;
+}
+
 .titleDescriptionTrick
 {
     font-size: 15px;

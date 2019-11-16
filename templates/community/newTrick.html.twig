@@ -5,7 +5,13 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-body">
-            <h2>Création d'un trick</h2>
+            <div class="pt10 pb10">
+                {% if editMode %}
+                    <h2>Modification du trick</h2>
+                {% else %}
+                    <h2>Création d'un trick</h2>
+                {% endif %}
+            </div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <p>Auteur: {{ app.user.username }}</p>
@@ -24,6 +30,13 @@
             {{ form_label(formTrick.mainImageLink, "Image principale") }}
             {{ form_widget(formTrick.mainImageLink) }}
 
+            <p>Autres images d'illustration</p>
+            <div class="images" data-prototype="{{ form_row(formTrick.images.vars.prototype)|e('html_attr') }}">
+            </div>
+            <p>Liens vers les vidéos</p>
+            <div class="videos  " data-prototype="{{ form_row(formTrick.videos.vars.prototype)|e('html_attr') }}">
+            </div>
+
             <div class="pt10 pb10">
                 <button type="submit" class="btn btn-primary">
                 {% if editMode %}
@@ -33,7 +46,6 @@
                 {% endif %}
                 </button>
             </div>
-
             {{ form_end(formTrick) }}
             </div>
         </div>

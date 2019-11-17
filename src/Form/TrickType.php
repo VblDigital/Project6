@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Trick;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,30 +30,20 @@ class TrickType extends AbstractType
                 'required' => false,
                 'constraints' => array(
                     new File())
-                ])
+            ])
             ->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,
-                'entry_options' => [
-                    'label' => false
-                ],
                 'label' => false,
-                'by_reference' => false,
                 'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-            ])
+                'allow_delete' => true
+             ])
             ->add('videos', CollectionType::class, [
                 'entry_type' => VideoType::class,
-                'required' => false,
-                'entry_options' => [
-                    'label' => false
-                ],
                 'label' => false,
-                'by_reference' => false,
                 'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-            ]);
+                'allow_delete' => true
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

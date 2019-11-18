@@ -39,7 +39,7 @@ jQuery(document).ready(function() {
     $collectionVideoHolder.append($newLinkVideo);
     $collectionVideoHolder.data('index', $collectionVideoHolder.find(':input').length);
 
-    $addImageButton.on('click', function(e) {
+    $addVideoButton.on('click', function(e) {
         addVideoForm($collectionVideoHolder, $newLinkVideo);
     });
 });

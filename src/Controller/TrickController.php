@@ -24,6 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class TrickController extends CommunityController
 {
     private $paginationHelper;
+
     public function __construct (PaginationHelper $paginationHelper)
     {
         $this->paginationHelper = $paginationHelper;
@@ -42,6 +43,7 @@ class TrickController extends CommunityController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
                 $file = $request->files->get('trick')['mainImageLink'];
                 $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
@@ -50,12 +52,30 @@ class TrickController extends CommunityController
                     $filename
                 );
 
+                $multipleImages = $trick->getImages();
+
+                if($multipleImages) {
+                    foreach ($multipleImages as $multipleImage)
+                    {
+                        $file = $multipleImage->getFile();
+                        $trickImage_uploads_directory = $this->getParameter('trickImage_uploads_directory');
+                        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                        $file->move(
+                            $trickImage_uploads_directory,
+                            $filename
+                        );
+                        $multipleImage->setFileName($filename);
+                    }
+                }
+
                 $trick
                     ->setCreatedDate(new \DateTime())
                     ->setLastEditDate(new \DateTime())
                     ->setMainImageLink($filename)
                     ->setAuthor($this->getUser());
                 $trick->setContributor($this->getUser());
+
+
 
                 $manager->persist($trick);
                 $manager->flush();
@@ -76,6 +96,7 @@ class TrickController extends CommunityController
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
+
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
             'editMode' => $trick->getId() !== null

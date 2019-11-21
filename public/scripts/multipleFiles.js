@@ -7,7 +7,7 @@ var $newLinkImage = $('<p></p>').append($addImageButton);
 jQuery(document).ready(function() {
     $collectionImageHolder = $('div.images');
     $collectionImageHolder.append($newLinkImage);
-    $collectionImageHolder.data('index', $collectionImageHolder.find(':input').length);
+    $collectionImageHolder.data('imageIndex', $collectionImageHolder.find(':input').length);
 
     $addImageButton.on('click', function(e) {
         addImageForm($collectionImageHolder, $newLinkImage);
@@ -20,7 +20,7 @@ function addImageForm($collectionImageHolder, $newLinkImage) {
     var imageIndex = $collectionImageHolder.data('imageIndex');
 
     var newImageForm = imagePrototype;
-    newImageForm = newImageForm.replace(/__name__label__/g, 'Sélectionner une image');
+    newImageForm = newImageForm.replace(/__name__/g, imageIndex, 'Sélectionner une image');
 
     $collectionImageHolder.data('imageIndex', imageIndex + 1);
 

@@ -54,7 +54,6 @@ class TrickController extends CommunityController
                 );
 
                 $multipleImages = array($trick->getImages());
-                dd($multipleImages);
 
                 if($multipleImages) {
                     foreach ($multipleImages as $multipleImage)
@@ -116,7 +115,7 @@ class TrickController extends CommunityController
 
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
-        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
+//        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -134,7 +133,7 @@ class TrickController extends CommunityController
             'trick' => $trick,
             'comments' => $comments,
             'formComment' => $form->createView(),
-            'paginationLinks' => $paginationLinks,
+//            'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
         ]);
     }

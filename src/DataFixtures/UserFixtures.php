@@ -17,33 +17,33 @@ class UserFixtures extends Fixture
      */
     public function load( ObjectManager $manager)
     {
-        $user = new User();
-        $user
-            ->setUsername('bobama')
-            ->setPassword('12345')
-            ->setEmail('bobama@usa.com')
-            ->setNewPass('0');
-        $manager->persist($user);
-        $this->addReference('bobama', $user);
-
-        $user = new User();
-        $user
-            ->setUsername('emacron')
-            ->setPassword('54321')
-            ->setEmail('emacron@france.fr')
-            ->setNewPass('0');
-        $manager->persist($user);
-        $this->addReference('emacron', $user);
-
-        $user = new user();
-        $user
-            ->setUsername('amerkel')
-            ->setPassword('12345')
-            ->setEmail('bobama@usa.com')
-            ->setNewPass('0');
-        $manager->persist($user);
-        $this->addReference('amerkel', $user);
-
-        $manager->flush();
+//        $user = new User();
+//        $user
+//            ->setUsername('bobama')
+//            ->setPassword('12345')
+//            ->setEmail('bobama@usa.com')
+//            ->setNewPass('0');
+//        $manager->persist($user);
+//        $this->addReference('bobama', $user);
+//
+//        $user = new User();
+//        $user
+//            ->setUsername('emacron')
+//            ->setPassword('54321')
+//            ->setEmail('emacron@france.fr')
+//            ->setNewPass('0');
+//        $manager->persist($user);
+//        $this->addReference('emacron', $user);
+//
+//        $user = new user();
+//        $user
+//            ->setUsername('amerkel')
+//            ->setPassword('12345')
+//            ->setEmail('bobama@usa.com')
+//            ->setNewPass('0');
+//        $manager->persist($user);
+//        $this->addReference('amerkel', $user);
+//
+//        $manager->flush();
     }
 }

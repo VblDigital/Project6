@@ -35,8 +35,8 @@ class SecurityController extends CommunityController
 
         if($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash)
-                 ->setRole('ROLE_USER');
+            $user->setPassword($hash);
+            $user->addRole('ROLE_USER');
 
             $manager->persist($user);
             $manager->flush();

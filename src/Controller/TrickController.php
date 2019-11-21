@@ -8,6 +8,7 @@ use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Service\Pagination\PaginationHelper;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -24,6 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class TrickController extends CommunityController
 {
     private $paginationHelper;
+
     public function __construct (PaginationHelper $paginationHelper)
     {
         $this->paginationHelper = $paginationHelper;
@@ -42,6 +44,7 @@ class TrickController extends CommunityController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
                 $file = $request->files->get('trick')['mainImageLink'];
                 $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
@@ -49,6 +52,25 @@ class TrickController extends CommunityController
                     $mainImage_uploads_directory,
                     $filename
                 );
+
+                $multipleImages = array($trick->getImages());
+                dd($multipleImages);
+
+                if($multipleImages) {
+                    foreach ($multipleImages as $multipleImage)
+                    {
+                        $file = $multipleImage->getFile();
+                        $trickImage_uploads_directory = $this->getParameter('trickImage_uploads_directory');
+                        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                        $file->move(
+                            $trickImage_uploads_directory,
+                            $filename
+                        );
+
+                        $multipleImage->setFilename($filename);
+                    }
+
+                }
 
                 $trick
                     ->setCreatedDate(new \DateTime())
@@ -76,6 +98,7 @@ class TrickController extends CommunityController
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
+
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
             'editMode' => $trick->getId() !== null

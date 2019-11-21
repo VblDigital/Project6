@@ -27,8 +27,12 @@
             {{ form_widget(formTrick.description) }}
             {{ form_label(formTrick.category, "Catégorie") }}
             {{ form_widget(formTrick.category) }}
-            {{ form_label(formTrick.mainImageLink, "Image principale") }}
-            {{ form_widget(formTrick.mainImageLink) }}
+            {% if editMode %}
+                Image
+            {% else %}
+                {{ form_label(formTrick.mainImageLink, "Image principale") }}
+                {{ form_widget(formTrick.mainImageLink) }}
+            {% endif %}
 
             {% block collection_widget_image %}
                 <p>Autres images d'illustration</p>

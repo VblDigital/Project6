@@ -8,6 +8,7 @@ use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Service\Pagination\PaginationHelper;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -52,7 +53,8 @@ class TrickController extends CommunityController
                     $filename
                 );
 
-                $multipleImages = $trick->getImages();
+                $multipleImages = array($trick->getImages());
+                dd($multipleImages);
 
                 if($multipleImages) {
                     foreach ($multipleImages as $multipleImage)
@@ -64,8 +66,10 @@ class TrickController extends CommunityController
                             $trickImage_uploads_directory,
                             $filename
                         );
-                        $multipleImage->setFileName($filename);
+
+                        $multipleImage->setFilename($filename);
                     }
+
                 }
 
                 $trick
@@ -74,8 +78,6 @@ class TrickController extends CommunityController
                     ->setMainImageLink($filename)
                     ->setAuthor($this->getUser());
                 $trick->setContributor($this->getUser());
-
-
 
                 $manager->persist($trick);
                 $manager->flush();

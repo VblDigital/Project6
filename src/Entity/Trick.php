@@ -376,7 +376,7 @@ class Trick
      */
     public function addImage(Image $image)
     {
-        $this->images[] = $image;
+        $this->images->add($image);
         $image->setTrick($this);
         return $this;
     }

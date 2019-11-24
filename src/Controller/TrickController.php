@@ -53,7 +53,7 @@ class TrickController extends CommunityController
                     $filename
                 );
 
-                $multipleImages = array($trick->getImages());
+                $multipleImages = $trick->getImages();
 
                 if($multipleImages) {
                     foreach ($multipleImages as $multipleImage)
@@ -66,7 +66,9 @@ class TrickController extends CommunityController
                             $filename
                         );
 
-                        $multipleImage->setFilename($filename);
+                        $test = array($multipleImage);
+                        dd($test);
+                            $test->setFilename($filename);
                     }
 
                 }
@@ -110,12 +112,13 @@ class TrickController extends CommunityController
     {
         $maxPerPage = 10;
         $page = (int) $request->query->get ('page', 1);
+
         $commentsCount = count($commentRepository->findAll());
         $pages = ceil($commentsCount/$maxPerPage);
 
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
-//        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
+        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -123,8 +126,8 @@ class TrickController extends CommunityController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime())
-                ->setTrick($trick)
-                ->setUser($this->getUser());
+                    ->setTrick($trick)
+                    ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
@@ -133,7 +136,7 @@ class TrickController extends CommunityController
             'trick' => $trick,
             'comments' => $comments,
             'formComment' => $form->createView(),
-//            'paginationLinks' => $paginationLinks,
+            'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
         ]);
     }

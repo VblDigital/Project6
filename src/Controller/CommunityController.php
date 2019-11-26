@@ -43,7 +43,6 @@ class CommunityController extends AbstractController
         $tricks = $trickRepository->findAllForPaginateAndSort($page, $maxPerPage);
 
         $paginationLinks = $this->paginationHelper->getUrl($page, $pages);
-        dd($paginationLinks);
 
         return $this->render('community/home.html.twig', [
             'paginationLinks' => $paginationLinks,

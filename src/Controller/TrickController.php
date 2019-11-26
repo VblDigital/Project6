@@ -11,6 +11,7 @@ use App\Service\Pagination\PaginationHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class TrickController
  * @package App\Controller
  */
-class TrickController extends CommunityController
+class TrickController extends AbstractController
 {
     private $paginationHelper;
 
@@ -53,7 +54,7 @@ class TrickController extends CommunityController
                     $filename
                 );
 
-                $multipleImages = $trick->getImages();
+                $multipleImages = array($trick->getImages());
 
                 if($multipleImages) {
                     foreach ($multipleImages as $multipleImage)
@@ -65,12 +66,8 @@ class TrickController extends CommunityController
                             $trickImage_uploads_directory,
                             $filename
                         );
-
-                        $test = array($multipleImage);
-                        dd($test);
-                            $test->setFilename($filename);
+                    $multipleImage->setFilename($filename);
                     }
-
                 }
 
                 $trick

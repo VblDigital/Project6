@@ -7,6 +7,7 @@ use App\Form\RegistrationType;
 use App\Form\NewPassType;
 use App\Form\EmailType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -20,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class SecurityController
  * @package App\Controller
  */
-class SecurityController extends CommunityController
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="security_registration")

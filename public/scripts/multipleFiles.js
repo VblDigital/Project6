@@ -20,6 +20,7 @@ function addImageForm($collectionImageHolder, $newLinkImage) {
     var imageIndex = $collectionImageHolder.data('imageIndex');
 
     var newImageForm = imagePrototype;
+
     newImageForm = newImageForm.replace(/__name__/g, imageIndex);
 
     $collectionImageHolder.data('imageIndex', imageIndex + 1);

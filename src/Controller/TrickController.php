@@ -11,6 +11,7 @@ use App\Service\Pagination\PaginationHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class TrickController
  * @package App\Controller
  */
-class TrickController extends CommunityController
+class TrickController extends AbstractController
 {
     private $paginationHelper;
 
@@ -65,10 +66,8 @@ class TrickController extends CommunityController
                             $trickImage_uploads_directory,
                             $filename
                         );
-
-                        $multipleImage->setFilename($filename);
+                    $multipleImage->setFilename($filename);
                     }
-
                 }
 
                 $trick
@@ -110,12 +109,13 @@ class TrickController extends CommunityController
     {
         $maxPerPage = 10;
         $page = (int) $request->query->get ('page', 1);
+
         $commentsCount = count($commentRepository->findAll());
         $pages = ceil($commentsCount/$maxPerPage);
 
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
-//        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
+        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -123,8 +123,8 @@ class TrickController extends CommunityController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime())
-                ->setTrick($trick)
-                ->setUser($this->getUser());
+                    ->setTrick($trick)
+                    ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
@@ -133,7 +133,7 @@ class TrickController extends CommunityController
             'trick' => $trick,
             'comments' => $comments,
             'formComment' => $form->createView(),
-//            'paginationLinks' => $paginationLinks,
+            'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
         ]);
     }

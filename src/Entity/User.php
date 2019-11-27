@@ -47,7 +47,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="array", length=255)
+     * @ORM\Column(type="array")
      */
     private $role;
 

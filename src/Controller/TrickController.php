@@ -31,6 +31,7 @@ class TrickController extends AbstractController
     {
         $this->paginationHelper = $paginationHelper;
     }
+
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
@@ -40,10 +41,8 @@ class TrickController extends AbstractController
     {
         if(!$trick) {
             $trick = new Trick();
-
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $file = $request->files->get('trick')['mainImageLink'];
@@ -77,16 +76,15 @@ class TrickController extends AbstractController
                     ->setAuthor($this->getUser());
                 $trick->setContributor($this->getUser());
 
+
                 $manager->persist($trick);
                 $manager->flush();
-
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
         else {
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $trick
                     ->setLastEditDate(new \DateTime())
@@ -96,7 +94,6 @@ class TrickController extends AbstractController
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
             }
         }
-
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
             'editMode' => $trick->getId() !== null
@@ -129,6 +126,7 @@ class TrickController extends AbstractController
             $manager->flush();
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
         }
+
         return $this->render('community/viewTrick.html.twig', [
             'trick' => $trick,
             'comments' => $comments,

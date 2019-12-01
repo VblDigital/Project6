@@ -54,7 +54,7 @@ class TrickController extends AbstractController
                     $filename
                 );
 
-                $multipleImages = array($trick->getImages());
+                $multipleImages = $trick->getImages();
 
                 if($multipleImages) {
                     foreach ($multipleImages as $multipleImage)
@@ -66,7 +66,7 @@ class TrickController extends AbstractController
                             $trickImage_uploads_directory,
                             $filename
                         );
-                    $multipleImage->setFilename($filename);
+                        $multipleImage->setFilename($filename);
                     }
                 }
 
@@ -123,8 +123,8 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime())
-                    ->setTrick($trick)
-                    ->setUser($this->getUser());
+                ->setTrick($trick)
+                ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);

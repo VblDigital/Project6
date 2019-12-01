@@ -4,21 +4,22 @@
             <h4 class="bold">Les commentaires</h4>
         </div>
         <div class="pt10">
-                {% if trick.comments is empty %}
-                Publier le premier commentaire !
-                {% else %}
-                    {% for comment in comments %}
-                        <div>
-                            {{ comment.text | raw }}<br/>
-                            Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
-                            -------------------------------------------
-                        </div>
-                    {% endfor %}
-                {% endif %}
-{#        <div>#}
-{#            {% include '/shared/Pagination.html.twig' with {#}
-{#            'route': 'comment_list_page'#}
-{#            } %}#}
-{#        </div>#}
+            {% if trick.comments is empty %}
+            Publier le premier commentaire !
+            {% else %}
+                {% for comment in comments %}
+                    <div>
+                        {{ comment.text | raw }}<br/>
+                        Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                        -------------------------------------------
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div>
+            {% include '/shared/pagination.html.twig' with {
+                'route': 'view_trick',
+            } %}
+        </div>
     </div>
 {% endblock %}

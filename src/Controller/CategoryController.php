@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -15,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class CategoryController
  * @package App\Controller
  */
-class CategoryController extends CommunityController
+class CategoryController extends AbstractController
 {
     /**
      * @Route("/newcategory", name="new_category")

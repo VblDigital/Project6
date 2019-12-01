@@ -5,11 +5,13 @@
 {% block body %}
     <div class="form-group row">
         <div class="panel-body">
-            {% if editMode %}
-                <h2>Modification d'un trick</h2>
-            {% else %}
-                <h2>Création d'un trick</h2>
-            {% endif %}
+            <div class="pt10 pb10">
+                {% if editMode %}
+                    <h2>Modification du trick</h2>
+                {% else %}
+                    <h2>Création d'un trick</h2>
+                {% endif %}
+            </div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <p>Auteur: {{ app.user.username }}</p>
@@ -25,8 +27,23 @@
             {{ form_widget(formTrick.description) }}
             {{ form_label(formTrick.category, "Catégorie") }}
             {{ form_widget(formTrick.category) }}
-            {{ form_label(formTrick.mainImageLink, "Image principale") }}
-            {{ form_widget(formTrick.mainImageLink) }}
+            {% if editMode %}
+                Image
+            {% else %}
+                {{ form_label(formTrick.mainImageLink, "Image principale") }}
+                {{ form_widget(formTrick.mainImageLink) }}
+            {% endif %}
+
+            {% block collection_widget_image %}
+                <p>Autres images d'illustration</p>
+                <div class="images" data-prototype-image="{{ form_widget(formTrick.images.vars.prototype)|e('html_attr') }}">
+                </div>
+            {% endblock %}
+            {% block collection_widget_video %}
+                <p>Liens vers les vidéos</p>
+                <div class="videos" data-prototype-video="{{ form_widget(formTrick.videos.vars.prototype)|e('html_attr') }}">
+                </div>
+            {% endblock %}
 
             <div class="pt10 pb10">
                 <button type="submit" class="btn btn-primary">
@@ -37,7 +54,6 @@
                 {% endif %}
                 </button>
             </div>
-
             {{ form_end(formTrick) }}
             </div>
         </div>

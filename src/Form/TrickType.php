@@ -4,11 +4,14 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Trick;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class TrickType extends AbstractType
 {
@@ -24,8 +27,23 @@ class TrickType extends AbstractType
             ])
             ->add('mainImageLink', FileType::class, [
                 'mapped' => false,
-                'required' => false
-            ]);
+                'required' => false,
+                'constraints' => array(
+                    new File())
+            ])
+            ->add('images', CollectionType::class, [
+                'entry_type' => ImageType::class,
+                'by_reference' => false,
+                'label' => false,
+                'allow_add' => true,
+             ])
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                'by_reference' => false,
+                'label' => false,
+                'allow_add' => true,
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

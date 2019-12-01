@@ -31,7 +31,6 @@ class TrickRepository extends ServiceEntityRepository
     /**
      * @param int $page
      * @param int $maxPerPage
-     *
      * @return Paginator
      */
     public function findAllForPaginateAndSort($page, $maxPerPage)

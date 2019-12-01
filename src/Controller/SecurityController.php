@@ -7,6 +7,7 @@ use App\Form\RegistrationType;
 use App\Form\NewPassType;
 use App\Form\EmailType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -20,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class SecurityController
  * @package App\Controller
  */
-class SecurityController extends CommunityController
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="security_registration")
@@ -36,6 +37,7 @@ class SecurityController extends CommunityController
         if($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->addRole('ROLE_USER');
 
             $manager->persist($user);
             $manager->flush();

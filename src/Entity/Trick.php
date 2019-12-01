@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,7 +44,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(type="text", length=255, nullable=false)
      */
     private $mainImageLink;
 
@@ -71,11 +72,23 @@ class Trick
     private $comments;
 
     /**
-     * Trick constructor.
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
      */
+    private $videos;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $images;
+
     public function __construct ()
     {
         $this->comments = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -303,6 +316,77 @@ class Trick
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+    /**
+     * @param ArrayCollection $videos
+     * @return $this
+     */
+    public function setVideos(ArrayCollection $videos)
+    {
+        $this->videos = $videos;
+        return $this;
+    }
+    /**
+     * @param Video $video
+     * @return $this
+     */
+    public function addVideo(Video $video)
+    {
+        $this->videos[] = $video;
+        $video->setTrick($this);
+        return $this;
+    }
+    /**
+     * @param Video $video
+     * @return $this
+     */
+    public function removeVideo(Video $video)
+    {
+        $this->videos->removeElement($video);
+        return $this;
+    }
+    /**
+     * @return Collection
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+    /**
+     * @param ArrayCollection $images
+     * @return Trick
+     */
+    public function setImages(ArrayCollection $images)
+    {
+        $this->images = $images;
+        return $this;
+    }
+    /**
+     * @param Image $image
+     * @return $this
+     */
+    public function addImage(Image $image)
+    {
+        $this->images->add($image);
+        $image->setTrick($this);
+        return $this;
+    }
+    /**
+     * @param Image $image
+     * @return $this
+     */
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
         return $this;
     }
 }

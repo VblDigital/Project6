@@ -7,9 +7,11 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
-use App\Service\PaginationHelper;
+use App\Service\Pagination\PaginationHelper;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * Class TrickController
  * @package App\Controller
  */
-class TrickController extends CommunityController
+class TrickController extends AbstractController
 {
     private $paginationHelper;
 
@@ -45,13 +47,27 @@ class TrickController extends CommunityController
 
                 $file = $request->files->get('trick')['mainImageLink'];
                 $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
-
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
-
                 $file->move(
                     $mainImage_uploads_directory,
                     $filename
                 );
+
+                $multipleImages = $trick->getImages();
+
+                if($multipleImages) {
+                    foreach ($multipleImages as $multipleImage)
+                    {
+                        $file = $multipleImage->getFile();
+                        $trickImage_uploads_directory = $this->getParameter('trickImage_uploads_directory');
+                        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                        $file->move(
+                            $trickImage_uploads_directory,
+                            $filename
+                        );
+                        $multipleImage->setFilename($filename);
+                    }
+                }
 
                 $trick
                     ->setCreatedDate(new \DateTime())
@@ -96,11 +112,9 @@ class TrickController extends CommunityController
 
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
-
         $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 

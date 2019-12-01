@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
-use App\Service\PaginationHelper;
+use App\Service\Pagination\PaginationHelper;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +17,16 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  */
 class CommunityController extends AbstractController
 {
+    private $paginationHelper;
+
+    public function __construct (PaginationHelper $paginationHelper)
+    {
+        $this->paginationHelper = $paginationHelper;
+    }
+
+    /**
+     * @var PaginationHelper
+     */
     private $paginationHelper;
 
     public function __construct (PaginationHelper $paginationHelper)

@@ -12,13 +12,10 @@
                     <h2>Création d'un trick</h2>
                 {% endif %}
             </div>
-
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <p>Auteur: {{ app.user.username }}</p>
             {% endif %}
             <div class="col-sm-2 col-md-5">
             {{ form_start(formTrick) }}
-
             {{ form_label(formTrick.name, "Nom") }}
             {{ form_widget(formTrick.name) }}
             {{ form_label(formTrick.chapo, "Chapo") }}
@@ -28,23 +25,36 @@
             {{ form_label(formTrick.category, "Catégorie") }}
             {{ form_widget(formTrick.category) }}
             {% if editMode %}
-                Image
+                {% if app.user == trick.author %}
+                    <p>Image principale</p>
+                    <div class="backgroundImage">
+                        <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ link) }}" alt="Image principale" />
+                    </div>
+                    {{ form_label(formTrick.mainImageLink, "Remplacer l'image principale") }}
+                    {{ form_widget(formTrick.mainImageLink) }}
+                {% else %}
+                    <p>Image principale</p>
+                    <div class="backgroundImage">
+                        <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ link) }}" alt="Image principale" />
+                    </div>
+                    {% do formTrick.mainImageLink.setRendered %}
+                {% endif %}
             {% else %}
                 {{ form_label(formTrick.mainImageLink, "Image principale") }}
                 {{ form_widget(formTrick.mainImageLink) }}
             {% endif %}
-
             {% block collection_widget_image %}
                 <p>Autres images d'illustration</p>
                 <div class="images" data-prototype-image="{{ form_widget(formTrick.images.vars.prototype)|e('html_attr') }}">
                 </div>
+                {% do formTrick.images.setRendered %}
             {% endblock %}
             {% block collection_widget_video %}
                 <p>Liens vers les vidéos</p>
                 <div class="videos" data-prototype-video="{{ form_widget(formTrick.videos.vars.prototype)|e('html_attr') }}">
                 </div>
+                {% do formTrick.videos.setRendered %}
             {% endblock %}
-
             <div class="pt10 pb10">
                 <button type="submit" class="btn btn-primary">
                 {% if editMode %}

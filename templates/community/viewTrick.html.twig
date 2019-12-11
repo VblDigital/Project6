@@ -6,26 +6,24 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="backgroundImage">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ trick.mainImageLink) }}" alt="Image principale" />
-                    <div class="backgroundImageTitle">
-                        <div class="black">
-                            <h1>{{ trick.name }}</h1>
-                        </div>
-                    </div>
-                </div>
+                <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ trick.mainImageLink) }}" alt="Image principale" />
             </div>
             <div class="galery">
+                <div class="black">
+                    <h1>{{ trick.name }}</h1>
+                </div>
+            </div>
+            <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
+                <div class="titleDescriptionTrick">Description du Trick : </div>
+                <div>{{ trick.description | raw }}</div>
+            </div>
+            <div>
                 <h3>Galerie</h3>
                 <i>Les images et les vidéos</i>
             </div>
             <div class="galery_sm">
                 <h3>Galerie</h3>
                 <i>Bouton</i>
-            </div>
-            <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
-                <div class="titleDescriptionTrick">Description du Trick : </div>
-                <div>{{ trick.description | raw }}</div>
             </div>
             <div class="infos pt20">
                 Créé par {{ trick.author.username }}<br/>

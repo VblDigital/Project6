@@ -17,13 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  */
 class CommunityController extends AbstractController
 {
-    private $paginationHelper;
-
-    public function __construct (PaginationHelper $paginationHelper)
-    {
-        $this->paginationHelper = $paginationHelper;
-    }
-
     /**
      * @var PaginationHelper
      */

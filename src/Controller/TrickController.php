@@ -187,4 +187,24 @@ class TrickController extends AbstractController
             'id' => $trick->getId(),
         ]);
     }
+
+    /**
+     * @Route("/trick/{id}/delete", name="delete_trick")
+     */
+    public function deleteTrick(Trick $trick = null, Request $request, ObjectManager $manager, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $trick = $em->getRepository(Trick::class)->find($id);
+
+        if(!$trick) {
+            $this->addFlash('notice', 'Ce Trick n\'existe pas.' );
+            return $this->redirectToRoute('view_trick');
+        }
+
+        $em->remove($trick);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }

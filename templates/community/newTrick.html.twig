@@ -47,7 +47,7 @@
                 <p>Autres images d'illustration</p>
                 <div class="images" data-prototype-image="{{ form_widget(formTrick.images.vars.prototype)|e('html_attr') }}">
                 </div>
-                {% do formTrick.images.setRendered %}
+{#                {% do formTrick.images.setRendered %}#}
             {% endblock %}
             {% block collection_widget_video %}
                 <p>Liens vers les vidéos</p>
@@ -68,4 +68,5 @@
             </div>
         </div>
     </div>
+    <input type="hidden" class="startIndex" value="{{ trick.images | length }}" />
 {% endblock %}

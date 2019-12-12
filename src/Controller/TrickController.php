@@ -124,17 +124,21 @@ class TrickController extends AbstractController
 
                 } elseif ($file == null) {
                     $multipleImages = $trick->getImages();
-                    if($multipleImages != null) {
+
+                    if(!$multipleImages->isEmpty()) {
                         foreach ($multipleImages as $multipleImage)
                         {
                             $file = $multipleImage->getFile();
-                            $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
-                            $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                            $file->move(
-                                $trickImage_uploads_directory,
-                                $trickImageFilename
-                            );
-                            $multipleImage->setFilename($trickImageFilename);
+                            if (null !== $file->getId()) {
+                                $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
+                                $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                                $file->move(
+                                    $trickImage_uploads_directory,
+                                    $trickImageFilename
+                                );
+                                $multipleImage->setFilename($trickImageFilename);
+                            }
+
                         }
                     }
 

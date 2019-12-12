@@ -56,7 +56,12 @@
             {% if app.user %}
             <p class="pt10">
                 <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-2x"></i></a>
-                <a href=""><i class="fas fa-trash-alt fa-2x"></i></a>
+                {% if app.user == trick.author %}
+                    <a href="/trick/{{ trick.id }}id}/delete" class="delete"
+                        data-confirm="Etes-vous sûr de vouloir supprimer ce Trick ? Cette action n'est pas réversible">
+                        <i class="fas fa-trash-alt fa-2x"></i>
+                    </a>
+                {% endif %}
             </p>
             {% endif %}
             <p><a href="/">Retour</a></p>

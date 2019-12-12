@@ -28,6 +28,10 @@ class SecurityController extends AbstractController
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('home');
+        }
+
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -171,7 +175,7 @@ class SecurityController extends AbstractController
      */
     public function login ()
     {
-        return $this->render('security/login.html.twig');
+            return $this->render('security/login.html.twig');
     }
 
     /**

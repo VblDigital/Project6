@@ -55,17 +55,17 @@ class TrickController extends AbstractController
 
                 $multipleImages = $trick->getImages();
 
-                if($multipleImages) {
+                if($multipleImages != null) {
                     foreach ($multipleImages as $multipleImage)
                     {
                         $file = $multipleImage->getFile();
-                        $trickImage_uploads_directory = $this->getParameter('trickImage_uploads_directory');
-                        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                        $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
+                        $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
                         $file->move(
                             $trickImage_uploads_directory,
-                            $filename
+                            $trickImageFilename
                         );
-                        $multipleImage->setFilename($filename);
+                        $multipleImage->setFilename($trickImageFilename);
                     }
                 }
 
@@ -89,14 +89,68 @@ class TrickController extends AbstractController
                 $trick
                     ->setLastEditDate(new \DateTime())
                     ->setContributor($this->getUser());
-                $manager->persist($trick);
-                $manager->flush();
-                return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+
+                $file = $request->files->get('trick')['mainImageLink'];
+                $author = $trick->getAuthor();
+
+                if ($file != null & $this->getUser() == $author) {
+                    $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move(
+                        $mainImage_uploads_directory,
+                        $filename);
+                    $trick->setMainImageLink($filename);
+
+                    $multipleImages = $trick->getImages();
+                    if($multipleImages != null) {
+                        foreach ($multipleImages as $multipleImage)
+                        {
+                            $file = $multipleImage->getFile();
+                            $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
+                            $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                            $file->move(
+                                $trickImage_uploads_directory,
+                                $trickImageFilename
+                            );
+                            $multipleImage->setFilename($trickImageFilename);
+                        }
+                    }
+
+                    $manager->persist($trick);
+                    $manager->flush();
+                    return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+
+                } elseif ($file == null) {
+                    $multipleImages = $trick->getImages();
+
+                    if(!$multipleImages->isEmpty()) {
+                        foreach ($multipleImages as $multipleImage)
+                        {
+                            $file = $multipleImage->getFile();
+                            if (null !== $file->getId()) {
+                                $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
+                                $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                                $file->move(
+                                    $trickImage_uploads_directory,
+                                    $trickImageFilename
+                                );
+                                $multipleImage->setFilename($trickImageFilename);
+                            }
+
+                        }
+                    }
+
+                    $manager->persist($trick);
+                    $manager->flush();
+                    return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+                }
             }
         }
         return $this->render('community/newTrick.html.twig', [
             'formTrick' => $form->createView(),
-            'editMode' => $trick->getId() !== null
+            'editMode' => $trick->getId() !== null,
+            'link' => $trick->getMainImageLink(),
+            'trick' => $trick
         ]);
     }
     /**

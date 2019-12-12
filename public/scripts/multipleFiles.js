@@ -7,7 +7,7 @@ var $newLinkImage = $('<p></p>').append($addImageButton);
 jQuery(document).ready(function() {
         $collectionImageHolder = $('div.images');
     $collectionImageHolder.append($newLinkImage);
-    $collectionImageHolder.data('imageIndex', $collectionImageHolder.find(':input').length);
+    $collectionImageHolder.data('imageIndex',$('.startIndex').val());
 
     $addImageButton.on('click', function(e) {
         addImageForm($collectionImageHolder, $newLinkImage);

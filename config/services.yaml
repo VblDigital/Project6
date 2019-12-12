@@ -6,7 +6,7 @@
 parameters:
 
     mainImage_uploads_directory: '%kernel.project_dir%/public/img/trickMainImage'
-    trickImage_uploads_directory: '%kernel.project_dir%/public/img/trickImages'
+    trickImages_uploads_directory: '%kernel.project_dir%/public/img/trickImages'
 
 services:
     # default configuration for services in *this* file

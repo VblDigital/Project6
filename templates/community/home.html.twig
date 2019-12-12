@@ -52,8 +52,13 @@
                             Créé par <b>{{ trick.author.username }}</b>|| Catégorie : <b>{{ trick.category.name }}</b>
                             <div class="icone_right">
                             {% if app.user %}
-                            <a href=""><i class="far fa-edit fa-1x"></i></a>
-                            <a href=""><i class="fas fa-trash-alt"></i></a>
+                            <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-1x"></i></a>
+                                {% if app.user == trick.author %}
+                                    <a href="/trick/{{ trick.id }}id}/delete" class="delete"
+                                       data-confirm="Etes-vous sûr de vouloir supprimer ce Trick ? Cette action n'est pas réversible">
+                                        <i class="fas fa-trash-alt fa"></i>
+                                    </a>
+                                {% endif %}
                             {% endif %}
                             </div>
                         </li>

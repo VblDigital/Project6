@@ -7,6 +7,7 @@ use Symfony\Component\Routing\RouterInterface;
 class PaginationHelper
 {
     private $routerInterface;
+
     public function __construct(RouterInterface $router) {
         $this->router = $router;
     }

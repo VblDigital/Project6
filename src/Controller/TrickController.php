@@ -26,12 +26,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class TrickController extends AbstractController
 {
     private $paginationHelper;
-
     public function __construct (PaginationHelper $paginationHelper)
     {
         $this->paginationHelper = $paginationHelper;
     }
-
     /**
      * @Route("/newtrick", name="new_trick")
      * @Route("/trick/{id}/edit", name="edit_trick")
@@ -41,10 +39,11 @@ class TrickController extends AbstractController
     {
         if(!$trick) {
             $trick = new Trick();
+
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
 
+            if ($form->isSubmitted() && $form->isValid()) {
                 $file = $request->files->get('trick')['mainImageLink'];
                 $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
@@ -76,7 +75,6 @@ class TrickController extends AbstractController
                     ->setAuthor($this->getUser());
                 $trick->setContributor($this->getUser());
 
-
                 $manager->persist($trick);
                 $manager->flush();
                 return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
@@ -85,7 +83,9 @@ class TrickController extends AbstractController
         else {
             $form = $this->createForm(TrickType::class, $trick);
             $form->handleRequest($request);
+
             if ($form->isSubmitted() && $form->isValid()) {
+
                 $trick
                     ->setLastEditDate(new \DateTime())
                     ->setContributor($this->getUser());
@@ -100,8 +100,8 @@ class TrickController extends AbstractController
                         $mainImage_uploads_directory,
                         $filename);
                     $trick->setMainImageLink($filename);
-
                     $multipleImages = $trick->getImages();
+
                     if($multipleImages != null) {
                         foreach ($multipleImages as $multipleImage)
                         {
@@ -119,7 +119,6 @@ class TrickController extends AbstractController
                     $manager->persist($trick);
                     $manager->flush();
                     return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
-
                 } elseif ($file == null) {
                     $multipleImages = $trick->getImages();
 
@@ -136,7 +135,6 @@ class TrickController extends AbstractController
                                 );
                                 $multipleImage->setFilename($trickImageFilename);
                             }
-
                         }
                     }
 
@@ -169,6 +167,7 @@ class TrickController extends AbstractController
         $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();
+
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -189,14 +188,12 @@ class TrickController extends AbstractController
             'id' => $trick->getId(),
         ]);
     }
-
     /**
      * @Route("/trick/{id}/delete", name="delete_trick")
      */
     public function deleteTrick(Trick $trick = null, Request $request, ObjectManager $manager, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $trick = $em->getRepository(Trick::class)->find($id);
 
         if(!$trick) {
@@ -206,7 +203,6 @@ class TrickController extends AbstractController
 
         $em->remove($trick);
         $em->flush();
-
         return $this->redirectToRoute('home');
     }
 }

@@ -7,16 +7,16 @@
         <div class="panel-body">
             <div class="backgroundImage">
                 <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ trick.mainImageLink) }}" alt="Image principale" />
-
-            </div>
-            <div class="galery">
-                <div class="black">
-                    <h1>{{ trick.name }}</h1>
-                </div>
             </div>
             <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
-                <div class="titleDescriptionTrick">Description du Trick : </div>
-                <div>{{ trick.description | raw }}</div>
+                <div class="backgroundImageTitle">
+                    <h1>{{ trick.name }}</h1>
+                </div>
+                <div class="titleDescriptionTrick">
+                     Description du Trick :
+                </div>
+                    {{ trick.description | raw }}
+                </div>
             </div>
             <div>
                 <h3>Galerie</h3>

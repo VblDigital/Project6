@@ -13,7 +13,7 @@
                     <h1>{{ trick.name }}</h1>
                 </div>
                 <div class="titleDescriptionTrick">
-                     Description du Trick :
+                    Description du Trick :
                 </div>
                 <div class="descriptionTrick">
                     {{ trick.description | raw }}
@@ -51,17 +51,18 @@
                 {% include 'community/viewComments.html.twig' %}
             </div>
             {% if app.user %}
-            <p class="pt10">
-                <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-2x"></i></a>
-                {% if app.user == trick.author %}
-                    <a href="/trick/{{ trick.id }}id}/delete" class="delete"
-                        data-confirm="Etes-vous sûr de vouloir supprimer ce Trick ? Cette action n'est pas réversible">
-                        <i class="fas fa-trash-alt fa-2x"></i>
-                    </a>
-                {% endif %}
-            </p>
+                <p class="pt10">
+                    <a href="/trick/{{ trick.id }}id}/edit"><i class="far fa-edit fa-2x"></i></a>
+                    {% if app.user == trick.author %}
+                        <a href="/trick/{{ trick.id }}id}/delete" class="delete"
+                           data-confirm="Etes-vous sûr de vouloir supprimer ce Trick ? Cette action n'est pas réversible">
+                            <i class="fas fa-trash-alt fa-2x"></i>
+                        </a>
+                    {% endif %}
+                </p>
             {% endif %}
             <p><a href="/" class="return">Retour</a></p>
         </div>
     </div>
 {% endblock %}
+

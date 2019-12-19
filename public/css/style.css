@@ -282,17 +282,13 @@ label
 }
 
 /* Galery */
-.galery
+.galery-title
 {
-    display: none;
+    font-family: Fight_Night, serif;
+    font-size: 1em;
 }
 
 .galery_sm
-{
-    display: none;
-}
-
-.galery
 {
     display: none;
 }

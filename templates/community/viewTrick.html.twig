@@ -21,7 +21,23 @@
             </div>
             <div class="view-trick-galery">
                 <h3 class="view-trick-galery-title">Galerie</h3>
-                <i>Les images et les vidéos</i>
+                <div>
+                    <i>Les images</i>
+                    <div>
+                        {% if images is empty %}
+                            <div>Il n'y a pas encore d'image pour ce trick</div>
+                        {% else %}
+                            <div>
+                                {% for image in images %}
+                                    <img src="{{ image.fileName }}" alt="Images"/>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <i>Les vidéos</i>
+                </div>
                 <div class="view-trick-infos">
                     Créé par {{ trick.author.username }}<br/>
                     Dernière modification par {{ trick.contributor.username }} le

@@ -506,6 +506,12 @@ h2
     font-family: Fight_Night, serif;
 }
 
+h4
+{
+    font-weight: bold;
+    font-family: Fight_Night, serif;
+}
+
 h4.underline
 {
     font-variant: titling-caps;

@@ -7,6 +7,9 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
+use App\Repository\ImageRepository;
+use App\Repository\VideoRepository;
+use App\Repository\TrickRepository;
 use App\Service\Pagination\PaginationHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -44,10 +47,10 @@ class TrickController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $file = $request->files->get('trick')['mainImageLink'];
+                $mainFile = $request->files->get('trick')['mainImageLink'];
                 $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
-                $filename = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move(
+                $filename = md5(uniqid()) . '.' . $mainFile->guessExtension();
+                $mainFile->move(
                     $mainImage_uploads_directory,
                     $filename
                 );
@@ -57,10 +60,10 @@ class TrickController extends AbstractController
                 if($multipleImages != null) {
                     foreach ($multipleImages as $multipleImage)
                     {
-                        $file = $multipleImage->getFile();
+                        $multipleFile = $multipleImage->getFile();
                         $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
-                        $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                        $file->move(
+                        $trickImageFilename = md5(uniqid()) . '.' . $multipleFile->guessExtension();
+                        $multipleFile->move(
                             $trickImage_uploads_directory,
                             $trickImageFilename
                         );
@@ -90,13 +93,13 @@ class TrickController extends AbstractController
                     ->setLastEditDate(new \DateTime())
                     ->setContributor($this->getUser());
 
-                $file = $request->files->get('trick')['mainImageLink'];
+                $mainFile = $request->files->get('trick')['mainImageLink'];
                 $author = $trick->getAuthor();
 
-                if ($file != null & $this->getUser() == $author) {
+                if ($mainFile != null & $this->getUser() == $author) {
                     $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
                     $filename = md5(uniqid()) . '.' . $file->guessExtension();
-                    $file->move(
+                    $mainFile->move(
                         $mainImage_uploads_directory,
                         $filename);
                     $trick->setMainImageLink($filename);
@@ -119,17 +122,17 @@ class TrickController extends AbstractController
                     $manager->persist($trick);
                     $manager->flush();
                     return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
-                } elseif ($file == null) {
+                } elseif ($mainFile == null) {
                     $multipleImages = $trick->getImages();
 
                     if(!$multipleImages->isEmpty()) {
                         foreach ($multipleImages as $multipleImage)
                         {
-                            $file = $multipleImage->getFile();
-                            if (null !== $file->getId()) {
+                            $multipleFile = $multipleImage->getFile();
+                            if (null !== $multipleFile->getId()) {
                                 $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
-                                $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                                $file->move(
+                                $trickImageFilename = md5(uniqid()) . '.' . $multipleFile->guessExtension();
+                                $multipleFile->move(
                                     $trickImage_uploads_directory,
                                     $trickImageFilename
                                 );
@@ -154,7 +157,8 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}", name="view_trick")
      */
-    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager, CommentRepository $commentRepository)
+    public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager,
+          CommentRepository $commentRepository, ImageRepository $imageRepository, VideoRepository $videoRepository)
     {
         $maxPerPage = 10;
         $page = (int) $request->query->get ('page', 1);
@@ -180,12 +184,17 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
         }
 
+        $images = $imageRepository->findBy(['trick' => $trick->getId()]);
+        $videos = $videoRepository->findBy(['trick' => $trick->getId()]);
+
         return $this->render('community/viewTrick.html.twig', [
             'trick' => $trick,
             'comments' => $comments,
             'formComment' => $form->createView(),
             'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
+            'images' => $images,
+            'video' => $videos
         ]);
     }
     /**

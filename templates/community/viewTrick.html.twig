@@ -15,21 +15,18 @@
                 <div class="titleDescriptionTrick">
                      Description du Trick :
                 </div>
+                <div class="descriptionTrick">
                     {{ trick.description | raw }}
                 </div>
             </div>
-            <div>
-                <h3>Galerie</h3>
+            <div class="view-trick-galery">
+                <h3 class="view-trick-galery-title">Galerie</h3>
                 <i>Les images et les vidéos</i>
-            </div>
-            <div class="galery_sm">
-                <h3>Galerie</h3>
-                <i>Bouton</i>
-            </div>
-            <div class="infos pt20">
-                Créé par {{ trick.author.username }}<br/>
-                Dernière modification par {{ trick.contributor.username }} le
+                <div class="view-trick-infos">
+                    Créé par {{ trick.author.username }}<br/>
+                    Dernière modification par {{ trick.contributor.username }} le
                     {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
+                </div>
             </div>
             <div class="card border-secondary mb-3" style="max-width: 58rem;">
                 {% if app.user %}
@@ -64,7 +61,7 @@
                 {% endif %}
             </p>
             {% endif %}
-            <p><a href="/">Retour</a></p>
+            <p><a href="/" class="return">Retour</a></p>
         </div>
     </div>
 {% endblock %}

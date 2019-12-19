@@ -1,5 +1,28 @@
 /* Yeti */
 
+/* Background */
+.backgroundImage {
+    max-width: 500px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.backgroundImage .block
+{
+    display: block;
+}
+
+.backgroundImageTitle {
+    right: 15%;
+    bottom: 10px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    text-align: center;
+    font-family: Fight_Night, serif;
+}
+
+/* Body */
 .panel-body
 {
     padding-left: 100px;
@@ -17,46 +40,6 @@
     padding: unset;
 }
 
-.navbar-default
-{
-    padding: unset;
-    margin: 0;
-}
-
-.blocTricks
-{
-    display: block;
-    padding: 10px;
-    width: 400px;
-}
-
-.fa-arrow-circle-down{
-    font-size: 5em;
-    float: right;
-    text-align: right;
-    margin: -50px -150px 50px;
-}
-
-.fa-arrow-circle-up{
-    font-size: 5em;
-    background-position: right;
-}
-
-.fa-sign-out-alt:before
-{
-    display: none;
-}
-
-h2
-{
-    font-weight: bold;
-}
-
-h4.underline
-{
-    font-variant: titling-caps;
-}
-
 .infos
 {
     font-size: 15px;
@@ -64,10 +47,7 @@ h4.underline
     padding: 0 0 10px 0;
 }
 
-label
-{
-    padding: 10px;
-}
+/* Custom */
 
 .custom-file-input ~ .custom-file-label::after {
     content: "Choisir une image";
@@ -77,33 +57,7 @@ label
     content: "" !important;
 }
 
-.titleDescriptionTrick
-{
-    font-size: 15px;
-    font-weight: bold;
-    padding-bottom: 10px;
-}
-
-.imageTrickHome
-{
-    align-self: center;
-    display: block;
-    width: 300px;
-    height: 300px;
-}
-
-.imageTrick
-{
-    align-self: center;
-    display: block;
-    max-width: 500px;
-}
-
-.icone_right
-{
-    float: right;
-}
-
+/* Card */
 .card-body
 {
     height: 150px;
@@ -112,190 +66,6 @@ label
 .card
 {
     margin: auto;
-}
-
-.galery
-{
-    display: none;
-}
-
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
-.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
-.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
-.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
-.col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
-.col-xl-auto {
-    padding: 0;
-}
-
-div.row
-{
-    margin: auto;
-}
-
-.maxWidth
-{
-    max-width: 25em;
-}
-
-/* Paragraph */
-.pt10
-{
-    padding-top: 10px;
-}
-.pb10
-{
-    padding-bottom: 10px;
-}
-
-.pt20
-{
-    padding-top: 20px;
-}
-
-p.title2
-{
-    font-size: 30px;
-}
-
-/* DIV */
-div.red
-{
-    color: red;
-}
-
-div.container
-{
-    min-width: 100%;
-}
-
-div.black
-{
-    color: #000;
-}
-
-div.right
-{
-    text-align: right;
-}
-
-.footer
-{
-    font-size: large;
-    text-align: center;
-}
-
-.footer_icone
-{
-    text-align: right;
-}
-
-i.right
-{
-    position: relative;
-}
-
-p.footer_icone
-{
-    display: none;
-}
-
-a.up
-{
-    display: none;
-}
-
-.backgroundImage {
-    position: relative;
-    width: max-content;
-    overflow: hidden;
-    margin: auto;
-}
-
-.backgroundImage .block
-{
-    display: block;
-}
-
-.backgroundImageTitle {
-    position: absolute;
-    right: 15%;
-    bottom: 10px;
-    left: 15%;
-    z-index: 10;
-    padding-top: 20px;
-    text-align: center;
-}
-
-.galery
-{
-    display: none;
-}
-
-.galery_sm
-{
-    display: none;
-}
-
-/*@media*/
-
-@media screen and (min-width: 1024px) {
-    a.up
-    {
-        display: block;
-    }
-    
-    .galery
-    {
-        display: block;
-    }
-}
-
-@media screen and (max-width: 1023.99px) {
-    h1 {
-        font-size: 30px;
-    }
-
-    p.title2 {
-        font-size: 15px;
-    }
-
-    .carousel-caption {
-        position: absolute;
-        right: 15%;
-        bottom: 20px;
-        left: 15%;
-        z-index: 10;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        color: #fff;
-        text-align: center;
-    }
-
-    .panel-body {
-        padding-left: 50px;
-    }
-
-    .fa-arrow-circle-down {
-        font-size: 3em;
-        float: inside;
-        margin: -20px -20px -20px;
-    }
-
-    .fa-sign-out-alt:before
-    {
-        display: block;
-    }
-
-    p.footer_icone
-    {
-        display: block;
-    }
-
-    .galery_sm
-    {
-        display: block;
-    }
 }
 
 /* Carousel */
@@ -460,22 +230,280 @@ a.up
     opacity: 1;
 }
 
-.carousel-caption {
-    position: absolute;
-    right: 15%;
-    bottom: 50px;
-    left: 15%;
-    z-index: 10;
-    padding-top: 20px;
-    color: #fff;
+/* Font Face */
+@font-face {
+    font-family: 'Fight_Night';
+    src: url(../fonts/Fight_Night.otf) format('opentype');
+}
+@font-face {
+    font-family: 'Snowboarding';
+    src: url(../fonts/Snowboarding.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'SkitserSwift';
+    src: url(../fonts/SkitserSwift.ttf) format('truetype');
+}
+
+/* Footer */
+.footer
+{
+    font-size: large;
     text-align: center;
 }
 
-/* Image */
-.d-block {
-    display: block !important;
+/* Form */
+
+.loginForm {
+    width: 250px;
 }
 
-.w-100 {
-    width: 100% !important;
+label
+{
+    padding: 10px;
+}
+
+/* Galery */
+.galery
+{
+    display: none;
+}
+
+.galery_sm
+{
+    display: none;
+}
+
+.galery
+{
+    display: none;
+}
+
+
+/* Icons */
+.fa-arrow-circle-down{
+    font-size: 7em;
+    position: relative;
+    top: 30px;
+    right: -670px;
+}
+
+.fa-arrow-circle-up{
+    font-size: 5em;
+    background-position: right;
+}
+
+.fa-sign-out-alt:before
+{
+    display: none;
+}
+
+.footer_icone
+{
+    text-align: right;
+}
+
+i.right
+{
+    position: relative;
+}
+
+p.footer_icone
+{
+    display: none;
+}
+
+.icone_right
+{
+    float: right;
+}
+
+/* Image */
+.imageTrickHome
+{
+    align-self: center;
+    display: block;
+    height: 280px;
+}
+
+.imageTrick
+{
+    align-self: center;
+    display: block;
+    max-width: 500px;
+}
+
+img.carousel {
+    width: 100%;
+    height: 700px;
+}
+
+/* Layout */
+div.red
+{
+    color: red;
+}
+
+div.container
+{
+    min-width: 100%;
+}
+
+div.black
+{
+    color: #000;
+}
+
+div.right
+{
+    text-align: right;
+}
+
+div.row
+{
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    float: none;
+}
+
+.maxWidth
+{
+    max-width: 25em;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
+.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
+.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
+.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
+.col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
+.col-xl-auto {
+    padding: 0;
+}
+
+/* Link */
+a.up
+{
+    display: none;
+}
+
+/* Navbar */
+.navbar-default
+{
+    padding: unset;
+    margin: 0;
+}
+
+.navbar {
+    height: 100px;
+    font-size: 1.4em;
+    font-family: Fight_Night, serif;
+}
+
+.navbar-brand {
+    font-size: 2em;
+}
+
+/* Paragraph */
+.pt10
+{
+    padding-top: 10px;
+}
+.pb10
+{
+    padding-bottom: 10px;
+}
+
+.pt20
+{
+    padding-top: 20px;
+}
+
+p.title2
+{
+    font-size: 4em;
+    font-family: SkitserSwift, serif;
+    color: #3688ae;
+}
+
+/* Responsive */
+@media screen and (max-width: 1023.99px) {
+    h1.title {
+        font-size: 5em;
+        font-family: Snowboarding, serif;
+        color: #072d3f;
+    }
+
+    .panel-body {
+        padding-left: 50px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .fa-arrow-circle-down {
+        font-size: 3em;
+        float: inside;
+        margin: -20px -20px -20px;
+    }
+
+    .fa-sign-out-alt:before
+    {
+        display: block;
+    }
+
+    p.footer_icone
+    {
+        display: block;
+    }
+
+    .galery_sm
+    {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    a.up
+    {
+        display: block;
+    }
+
+    .galery
+    {
+        display: block;
+    }
+}
+
+/* Title */
+h1.titleBanner {
+    font-size: 18em;
+    font-family: Snowboarding, serif;
+    color: #072d3f;
+    position: relative;
+    top: 150px
+}
+
+h2
+{
+    font-weight: bold;
+}
+
+h4.underline
+{
+    font-variant: titling-caps;
+}
+
+.titleDescriptionTrick
+{
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+/* Tricks */
+.blocTricks
+{
+    display: block;
+    padding: 10px;
+    width: 400px;
 }

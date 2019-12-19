@@ -68,6 +68,19 @@
     margin: auto;
 }
 
+.card-size {
+    width: 400px;
+    height: 550px;
+}
+
+.card-header {
+    font-family: Fight_Night, serif;
+}
+
+.card-text {
+    font-family: ModernSans-Light, serif;
+}
+
 /* Carousel */
 .carousel {
     position: relative;
@@ -245,6 +258,11 @@
     src: url(../fonts/SkitserSwift.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'ModernSans-Light';
+    src: url(../fonts/ModernSans-Light.otf) format('opentype');
+}
+
 /* Footer */
 .footer
 {
@@ -323,7 +341,8 @@ p.footer_icone
 {
     align-self: center;
     display: block;
-    height: 280px;
+    max-height: 280px;
+    max-width: 300px;
 }
 
 .imageTrick
@@ -367,11 +386,6 @@ div.row
     float: none;
 }
 
-.maxWidth
-{
-    max-width: 25em;
-}
-
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
@@ -385,6 +399,13 @@ div.row
 a.up
 {
     display: none;
+}
+
+a.return
+{
+    font-family: ModernSans-Light, Serif;
+    font-size: 2em;
+    padding-left: 10px;
 }
 
 /* Navbar */
@@ -486,6 +507,7 @@ h1.titleBanner {
 h2
 {
     font-weight: bold;
+    font-family: Fight_Night, serif;
 }
 
 h4.underline
@@ -495,15 +517,36 @@ h4.underline
 
 .titleDescriptionTrick
 {
-    font-size: 15px;
+    font-size: 1.8em;
     font-weight: bold;
     padding-bottom: 10px;
+    padding-left: 10px;
+    font-family: ModernSans-Light, serif;
+}
+
+.view-trick-galery-title {
+    font-size: 2em;
 }
 
 /* Tricks */
-.blocTricks
-{
-    display: block;
-    padding: 10px;
-    width: 400px;
+div.view-trick-galery {
+    padding-left: 20px;
+    font-family: "Fight_Night", serif;
+    font-size: 1.5em;
 }
+
+div.view-trick-infos {
+    font-family: ModernSans-Light, serif;
+    font-size: 1em;
+    padding-bottom: 50px;
+}
+
+.descriptionTrick
+{
+    font-size: 1.4em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-family: ModernSans-Light, serif;
+}
+
+

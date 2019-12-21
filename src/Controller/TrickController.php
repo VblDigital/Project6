@@ -129,7 +129,7 @@ class TrickController extends AbstractController
                         foreach ($multipleImages as $multipleImage)
                         {
                             $multipleFile = $multipleImage->getFile();
-                            if (null !== $multipleFile->getId()) {
+                            if (null !== $multipleFile) {
                                 $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
                                 $trickImageFilename = md5(uniqid()) . '.' . $multipleFile->guessExtension();
                                 $multipleFile->move(
@@ -167,7 +167,7 @@ class TrickController extends AbstractController
         $pages = ceil($commentsCount/$maxPerPage);
 
         /** @var Trick [] */
-        $comments = $commentRepository->findAllCommentsForPaginateAndSort($page, $maxPerPage);
+        $comments = $commentRepository->findAllCommentsForPaginateAndSort($trick, $page, $maxPerPage);
         $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
 
         $comment = new Comment();

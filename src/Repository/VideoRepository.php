@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Video;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\AbstractQuery;
@@ -21,6 +22,6 @@ class VideoRepository extends ServiceEntityRepository
      */
     public function __construct( ManagerRegistry $registry)
     {
-        parent::__construct($registry, user::class);
+        parent::__construct($registry, Video::class);
     }
 }

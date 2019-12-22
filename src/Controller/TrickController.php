@@ -57,7 +57,7 @@ class TrickController extends AbstractController
 
                 $multipleImages = $trick->getImages();
 
-                if($multipleImages != null) {
+                if(!$multipleImages->isEmpty()) {
                     foreach ($multipleImages as $multipleImage)
                     {
                         $multipleFile = $multipleImage->getFile();
@@ -98,26 +98,27 @@ class TrickController extends AbstractController
 
                 if ($mainFile != null & $this->getUser() == $author) {
                     $mainImage_uploads_directory = $this->getParameter('mainImage_uploads_directory');
-                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $filename = md5(uniqid()) . '.' . $mainFile->guessExtension();
                     $mainFile->move(
                         $mainImage_uploads_directory,
                         $filename);
                     $trick->setMainImageLink($filename);
-                    $multipleImages = $trick->getImages();
 
-                    if($multipleImages != null) {
+                    $multipleImages = $form->getdata()->getImages();
+
                         foreach ($multipleImages as $multipleImage)
                         {
-                            $file = $multipleImage->getFile();
-                            $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
-                            $trickImageFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                            $file->move(
-                                $trickImage_uploads_directory,
-                                $trickImageFilename
-                            );
-                            $multipleImage->setFilename($trickImageFilename);
+                            $multipleFile = $multipleImage->getFile();
+                            if($multipleFile != null) {
+                                $trickImage_uploads_directory = $this->getParameter('trickImages_uploads_directory');
+                                $trickImageFilename = md5(uniqid()) . '.' . $multipleFile->guessExtension();
+                                $multipleFile->move(
+                                    $trickImage_uploads_directory,
+                                    $trickImageFilename
+                                );
+                                $multipleImage->setFilename($trickImageFilename);
+                            }
                         }
-                    }
 
                     $manager->persist($trick);
                     $manager->flush();
@@ -194,7 +195,7 @@ class TrickController extends AbstractController
             'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
             'images' => $images,
-            'video' => $videos
+            'videos' => $videos
         ]);
     }
     /**

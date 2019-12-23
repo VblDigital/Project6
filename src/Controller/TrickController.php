@@ -124,7 +124,6 @@ class TrickController extends AbstractController
                         }
 
                     $videos = $form->getdata()->getVideos();
-                        dd($videos);
 
                         foreach ($videos as $video)
                         {

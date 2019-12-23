@@ -3,14 +3,16 @@
         <div class="card-header">
             <h4 class="bold">Les commentaires</h4>
         </div>
-        <div class="pt10 comment-text">
+        <div class="pt10 comment-text-title">
             {% if trick.comments is empty %}
             Publier le premier commentaire !
             {% else %}
                 {% for comment in comments %}
                     {{ comment.text | raw }}<br/>
-                    Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
-                    -------------------------------------------
+                    <div class="comment-text">
+                        Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                    </div>
+            -------------------------------------------</br>
                 {% endfor %}
             {% endif %}
         </div>

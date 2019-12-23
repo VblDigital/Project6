@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
@@ -31,7 +32,7 @@ class CommentRepository extends ServiceEntityRepository
      *
      * @return Paginator
      */
-    public function findAllCommentsForPaginateAndSort($page, $maxPerPage)
+    public function findAllCommentsForPaginateAndSort(Trick $trick, $page, $maxPerPage)
     {
         if ($page <= 1) {
             $page = 1;
@@ -39,6 +40,8 @@ class CommentRepository extends ServiceEntityRepository
         $commentsResults = ($page*$maxPerPage) - $maxPerPage;
 
         $query = $this->createQueryBuilder('c')
+            ->where('c.trick = :trick' )
+            ->setParameter('trick', $trick)
             ->orderBy('c.date', 'DESC')
             ->setFirstResult($commentsResults)
             ->setMaxResults($maxPerPage);

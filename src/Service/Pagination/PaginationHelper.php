@@ -31,7 +31,7 @@ class PaginationHelper
     /**
      * @param $page
      * @param $pages
-     * @param $trickId
+     * @param $trickSlug
      * @return array
      */
     public function getCommentUrl ($page, $pages, $trickSlug)
@@ -39,10 +39,10 @@ class PaginationHelper
         $paginationLinks = array(
             'page' => $page,
             'pages' => $pages,
-            'firstPage' => $this->router->generate('view_trick', ['id' => $trickSlug, 'page' => '1']),
-            'lastPage' => $this->router->generate('view_trick', ['id' => $trickSlug, 'page' => $pages]),
-            'nextPage' => $this->router->generate('view_trick', ['id' => $trickSlug, 'page' => ($page + 1)]),
-            'previousPage' => $this->router->generate('view_trick', ['id' => $trickSlug, 'page' => ($page - 1)])
+            'firstPage' => $this->router->generate('view_trick', ['slug' => $trickSlug, 'page' => '1']),
+            'lastPage' => $this->router->generate('view_trick', ['slug' => $trickSlug, 'page' => $pages]),
+            'nextPage' => $this->router->generate('view_trick', ['slug' => $trickSlug, 'page' => ($page + 1)]),
+            'previousPage' => $this->router->generate('view_trick', ['slug' => $trickSlug, 'page' => ($page - 1)])
         );
         return $paginationLinks;
     }

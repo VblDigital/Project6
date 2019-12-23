@@ -82,12 +82,12 @@
                     <h4>Nouveau commentaire</h4>
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <p class="comment-text">Auteur: {{ app.user.username }}</p>
+                        <p class="comment-text-title">Auteur: {{ app.user.username }}</p>
                     {% endif %}
 
                     {{ form_start(formComment) }}
 
-                    {{ form_row(formComment.text, {'label': 'Commentaire :', 'label_attr': {'class': 'comment-text'} }) }}
+                    {{ form_row(formComment.text, {'label': 'Commentaire :', 'label_attr': {'class': 'comment-text-title'} }) }}
 
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
 

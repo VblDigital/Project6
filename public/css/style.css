@@ -43,8 +43,13 @@
 }
 
 /* Comment */
-.comment-text {
+.comment-text-title {
     font-size: 1.5em;
+    font-family: Wreckers, serif;
+}
+
+.comment-text {
+    font-size: 1em;
     font-family: Wreckers, serif;
 }
 

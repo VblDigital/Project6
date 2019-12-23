@@ -80,7 +80,10 @@ class TrickController extends AbstractController
 
                 $manager->persist($trick);
                 $manager->flush();
-                return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+                return $this->redirectToRoute('view_trick', [
+                    'id' => $trick->getId(),
+                    'slug' => $trick->getSlug()
+                ]);
             }
         }
         else {
@@ -133,7 +136,10 @@ class TrickController extends AbstractController
 
                     $manager->persist($trick);
                     $manager->flush();
-                    return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+                    return $this->redirectToRoute('view_trick', [
+                        'id' => $trick->getId(),
+                        'slug' => $trick->getSlug()
+                    ]);
                 } elseif ($mainFile == null) {
                     $multipleImages = $trick->getImages();
 
@@ -155,7 +161,10 @@ class TrickController extends AbstractController
 
                     $manager->persist($trick);
                     $manager->flush();
-                    return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+                    return $this->redirectToRoute('view_trick', [
+                        'id' => $trick->getId(),
+                        'slug' => $trick->getSlug()
+                    ]);
                 }
             }
         }
@@ -167,7 +176,7 @@ class TrickController extends AbstractController
         ]);
     }
     /**
-     * @Route("/trick/{id}", name="view_trick")
+     * @Route("/trick/{slug}", name="view_trick")
      */
     public function viewTrick(Trick $trick = null, Request $request, ObjectManager $manager,
           CommentRepository $commentRepository, ImageRepository $imageRepository, VideoRepository $videoRepository)
@@ -193,7 +202,10 @@ class TrickController extends AbstractController
                 ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
-            return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('view_trick', [
+                'id' => $trick->getId(),
+                'slug' => $trick->getSlug()
+            ]);
         }
 
         $images = $imageRepository->findBy(['trick' => $trick->getId()]);
@@ -206,7 +218,8 @@ class TrickController extends AbstractController
             'paginationLinks' => $paginationLinks,
             'id' => $trick->getId(),
             'images' => $images,
-            'videos' => $videos
+            'videos' => $videos,
+            'slug' => $trick->getSlug()
         ]);
     }
     /**
@@ -219,7 +232,10 @@ class TrickController extends AbstractController
 
         if(!$trick) {
             $this->addFlash('notice', 'Ce Trick n\'existe pas.' );
-            return $this->redirectToRoute('view_trick');
+            return $this->redirectToRoute('view_trick', [
+                'id' => $trick->getId(),
+                'slug' => $trick->getSlug()
+            ]);
         }
 
         $em->remove($trick);

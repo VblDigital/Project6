@@ -120,6 +120,17 @@ class TrickController extends AbstractController
                             }
                         }
 
+                    $videos = $form->getdata()->getVideos();
+                        dd($videos);
+
+                        foreach ($videos as $video)
+                        {
+                            $videoLink = $video->getFile();
+                            if($videoLink != null) {
+                                $video->setFilename('https://www.youtube.com/embed/' . $videoLink);
+                            }
+                        }
+
                     $manager->persist($trick);
                     $manager->flush();
                     return $this->redirectToRoute('view_trick', ['id' => $trick->getId()]);

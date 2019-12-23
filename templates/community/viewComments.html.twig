@@ -10,7 +10,8 @@
                 {% for comment in comments %}
                     {{ comment.text | raw }}<br/>
                     <div class="comment-text">
-                        Posté par {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
+                        Posté par <img class="avatar" src="{{ asset('/img/avatar/' ~ comment.user.avatar) }}" alt="avatar" />
+                        {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
                     </div>
             -------------------------------------------</br>
                 {% endfor %}

@@ -31,17 +31,23 @@ class SecurityController extends AbstractController
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
-
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->getData()->getAvatar();
+            $avatar_uploads_directory = $this->getParameter('avatar_uploads_directory');
+            $avatarFilename = md5(uniqid()) . '.' . $avatarFile->guessExtension();
+            $avatarFile->move(
+                $avatar_uploads_directory,
+                $avatarFilename
+            );
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->addRole('ROLE_USER');
+            $user->setAvatar($avatarFilename);
 
             $manager->persist($user);
             $manager->flush();

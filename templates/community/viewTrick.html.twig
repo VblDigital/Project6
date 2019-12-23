@@ -72,7 +72,8 @@
                     </div>
                 </div>
                 <div class="view-trick-infos">
-                    Créé par {{ trick.author.username }}<br/>
+                    Créé par <img class="avatar" src="{{ asset('/img/avatar/' ~ trick.author.avatar) }}" alt="avatar" />
+                    {{ trick.author.username }}<br/>
                     Dernière modification par {{ trick.contributor.username }} le
                     {{ trick.lastEditDate | date ('d/m/y à H:i') }} || Catégorie : {{ trick.category.name }}
                 </div>
@@ -82,7 +83,9 @@
                     <h4>Nouveau commentaire</h4>
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <p class="comment-text-title">Auteur: {{ app.user.username }}</p>
+                        <p class="comment-text-title">Auteur:
+                        <img class="avatar" src="{{ asset('/img/avatar/' ~ app.user.avatar) }}" alt="avatar" />
+                        {{ app.user.username }}</p>
                     {% endif %}
 
                     {{ form_start(formComment) }}

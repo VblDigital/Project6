@@ -19,22 +19,22 @@
                 <ul class="navbar-nav mr-auto">
                     {% if not app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_registration') }}">Créer un compte</a>
+                        <a class="nav-link" href="{{ path('security_registration') }}">Créer un compte ¦ </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_login') }}">Se connecter</a>
+                        <a class="nav-link" href="{{ path('security_login') }}">Se connecter ¦ </a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_logout') }}">Se deconnecter</a>
+                        <a class="nav-link" href="{{ path('security_logout') }}">Se deconnecter ¦ </a>
                     </li>
                     {% endif %}
                     {% if app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('new_trick') }}">Créer un nouveau Trick</a>
+                        <a class="nav-link" href="{{ path('new_trick') }}">Créer un nouveau Trick ¦ </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('new_category') }}">Créer une nouvelle catégorie</a>
+                        <a class="nav-link" href="{{ path('new_category') }}">Créer une nouvelle catégorie ¦ </a>
                     </li>
                     {% endif %}
                 </ul>

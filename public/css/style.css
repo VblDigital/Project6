@@ -19,15 +19,10 @@
     z-index: 10;
     padding-top: 20px;
     text-align: center;
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
 }
 
 /* Body */
-.panel-body
-{
-    padding-left: 100px;
-}
-
 .jumbotron
 {
     padding: unset;
@@ -45,6 +40,12 @@
     font-size: 15px;
     font-style: oblique;
     padding: 0 0 10px 0;
+}
+
+/* Comment */
+.comment-text {
+    font-size: 1.5em;
+    font-family: Wreckers, serif;
 }
 
 /* Custom */
@@ -74,7 +75,7 @@
 }
 
 .card-header {
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
 }
 
 .card-text {
@@ -82,9 +83,9 @@
 }
 
 /* Carousel */
-.carousel {
-    position: relative;
-}
+/*.carousel {*/
+/*    position: relative;*/
+/*}*/
 
 .carousel.pointer-event {
     -ms-touch-action: pan-y;
@@ -245,8 +246,8 @@
 
 /* Font Face */
 @font-face {
-    font-family: 'Fight_Night';
-    src: url(../fonts/Fight_Night.otf) format('opentype');
+    font-family: 'Wreckers';
+    src: url(../fonts/Wreckers.otf) format('opentype');
 }
 @font-face {
     font-family: 'Snowboarding';
@@ -281,10 +282,20 @@ label
     padding: 10px;
 }
 
+.panel-body {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.form-title {
+    font-family: ModernSans-Light, serif;
+    font-size: 1.1em;
+}
+
 /* Galery */
 .galery-title
 {
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
     font-size: 1em;
 }
 
@@ -293,6 +304,10 @@ label
     display: none;
 }
 
+.galery
+{
+    display: block;
+}
 
 /* Icons */
 .fa-arrow-circle-down{
@@ -399,17 +414,24 @@ div.row
     padding: 0;
 }
 
+.red {
+    color: red;
+}
+
 /* Link */
 a.up
 {
-    display: none;
+    display: block;
 }
 
 a.return
 {
     font-family: ModernSans-Light, serif;
     font-size: 1.5em;
-    padding-left: 10px;
+}
+
+a.nav-link {
+    font-size: 1.2em;
 }
 
 /* Navbar */
@@ -422,11 +444,12 @@ a.return
 .navbar {
     height: 100px;
     font-size: 1.4em;
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
+    z-index:1;
 }
 
 .navbar-brand {
-    font-size: 2em;
+    font-size: 3.2em;
 }
 
 /* Paragraph */
@@ -451,20 +474,33 @@ p.title2
     color: #3688ae;
 }
 
-/* Responsive */
 @media screen and (max-width: 1023.99px) {
-    h1.title {
-        font-size: 5em;
-        font-family: Snowboarding, serif;
-        color: #072d3f;
-    }
-
+/* Responsive */
+    /* Body */
     .panel-body {
         padding-left: 50px;
+        padding-right: 50px;
         width: 100%;
-        text-align: center;
     }
 
+    /* Carousel */
+    img.carousel {
+        height: 700px;
+        padding-right: 15px;
+    }
+
+    /* Galery */
+    .galery_sm
+    {
+        display: block;
+    }
+
+    .view-trick-galery {
+        font-family: Wreckers, serif;
+        font-size: 1.5em;
+    }
+
+    /* Icon */
     .fa-arrow-circle-down {
         font-size: 3em;
         float: inside;
@@ -480,23 +516,24 @@ p.title2
     {
         display: block;
     }
+    
+    /* Link */
+    .nav-link {
+        background-color: #333;
+    }
 
-    .galery_sm
-    {
-        display: block;
+/* Title*/
+    h1.title {
+    font-size: 5em;
+    font-family: Snowboarding, serif;
+    color: #072d3f;
     }
 }
 
 @media screen and (min-width: 1024px) {
-    a.up
-    {
-        display: block;
-    }
 
-    .galery
-    {
-        display: block;
-    }
+
+
 }
 
 /* Title */
@@ -511,13 +548,13 @@ h1.titleBanner {
 h2
 {
     font-weight: bold;
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
 }
 
 h4
 {
     font-weight: bold;
-    font-family: Fight_Night, serif;
+    font-family: Wreckers, serif;
 }
 
 h4.underline
@@ -539,16 +576,19 @@ h4.underline
 }
 
 /* Tricks */
-div.view-trick-galery {
-    padding-left: 20px;
-    font-family: "Fight_Night", serif;
+.view-trick-galery {
+    padding-left: 100px;
+    padding-right: 100px;
+    font-family: Wreckers, serif;
     font-size: 1.5em;
 }
 
-div.view-trick-infos {
+.view-trick-infos {
     font-family: ModernSans-Light, serif;
     font-size: 1em;
-    padding-bottom: 50px;
+    padding: 10px 0px 30px 10px ;
+    background-color: #3688ae;
+    color: white;
 }
 
 .descriptionTrick

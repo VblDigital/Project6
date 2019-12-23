@@ -535,12 +535,6 @@ p.title2
     }
 }
 
-@media screen and (min-width: 1024px) {
-
-
-
-}
-
 /* Title */
 h1.titleBanner {
     font-size: 18em;
@@ -565,6 +559,12 @@ h4
 h4.underline
 {
     font-variant: titling-caps;
+}
+
+.error404 {
+    font-size: 2em;
+    font-family: ModernSans-Light, serif;
+    color: #072d3f;
 }
 
 .titleDescriptionTrick

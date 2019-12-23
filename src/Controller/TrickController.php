@@ -189,7 +189,7 @@ class TrickController extends AbstractController
 
         /** @var Trick [] */
         $comments = $commentRepository->findAllCommentsForPaginateAndSort($trick, $page, $maxPerPage);
-        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getId());
+        $paginationLinks = $this->paginationHelper->getCommentUrl($page, $pages, $trick->getSlug());
 
         $comment = new Comment();
 

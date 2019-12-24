@@ -35,8 +35,7 @@ class TrickType extends AbstractType
                 'entry_type' => ImageType::class,
                 'by_reference' => false,
                 'label' => false,
-                'allow_add' => true,
-                'attr' => array('placeholder' => "https://www.youtube.com/embed/[référence de la vidéo]")
+                'allow_add' => true
              ])
             ->add('videos', CollectionType::class, [
                 'entry_type' => VideoType::class,

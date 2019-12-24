@@ -65,6 +65,11 @@ class User implements UserInterface
     private $token;
 
     /**
+     * @ORM\Column(type="text", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="author")
      */
     private $tricks;
@@ -306,5 +311,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar ()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar ( $avatar ): void
+    {
+        $this->avatar = $avatar;
     }
 }

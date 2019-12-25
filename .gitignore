@@ -23,4 +23,12 @@
 ###< misc ###
 
 .env
-/public/img
+public/img/avatar/*.png
+public/img/trickImages/*.png
+public/img/trickMainImage/*.png
+public/img/avatar/*.jpg
+public/img/trickImages/*.jpg
+public/img/trickMainImage/*.jpg
+public/img/avatar/*.jpeg
+public/img/trickImages/*.jpeg
+public/img/trickMainImage/*.jpeg

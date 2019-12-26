@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -179,9 +180,23 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login ()
+//    public function login (Request $request)
+//    {
+//        return $this->render('security/login.html.twig');
+//    }
+
+    public function login(AuthenticationUtils $authenticationUtils)
     {
-            return $this->render('security/login.html.twig');
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
     }
 
     /**
@@ -189,18 +204,4 @@ class SecurityController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     public function logout() {}
-
-    /**
-     * @Route("/user/{id}", name="view_user")
-     * @Security("is_granted('ROLE_USER')")
-     */
-    public function viewUser($id)
-    {
-        $repo = $this->getDoctrine()->getRepository(User::class);
-        $user = $repo->find($id);
-
-        return $this->render('community/viewUser.html.twig', [
-            'user' => $user
-        ]);
-    }
 }

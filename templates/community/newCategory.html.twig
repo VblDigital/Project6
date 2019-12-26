@@ -9,9 +9,12 @@
 
             {{ form_start(formCategory) }}
 
-            {{ form_row(formCategory.name, {'label': 'Nom de la catégorie' }) }}
+            {{ form_label(formCategory.name, "Nom de la catégorie :", {'label_attr': {'class': 'form-title'}}) }}
+            {{ form_widget(formCategory.name) }}
 
+            <div class="pt10 pb10">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
 
             {{ form_end(formCategory) }}
         </div>

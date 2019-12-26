@@ -108,4 +108,12 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory ( $category ): void
+    {
+        $this->category = $category;
+    }
 }

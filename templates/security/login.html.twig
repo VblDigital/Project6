@@ -4,24 +4,20 @@
 
 {% block body %}
     <form action="{{ path('security_login') }}" method="post">
-        {% if app.session.flashBag.has('notice') %}
-            <p class="panel-body-red">
-                {% for msg in app.session.flashBag.get('notice') %}
-                    {{ msg }}
-                {% endfor %}
-            </p>
+        {% if error %}
+            <div class="red pt10 pl15">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
         <div class="panel-body">
             <h2>Se connecter</h2>
             <div class="form-group">
                 <div class="loginForm">
-                    <label for="login">Identifiant</label>
+                    <label for="login" class="form-title">Identifiant :</label>
                     <input type="text" class="form-control" id="login" name="_username">
                 </div>
             </div>
             <div class="form-group">
                 <div class="loginForm">
-                    <label for="password">Mot de passe</label>
+                    <label for="password" class="form-title">Mot de passe :</label>
                     <input type="password" class="form-control" id="password" name="_password">
                 </div>
             </div>

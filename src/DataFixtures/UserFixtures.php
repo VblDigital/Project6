@@ -30,6 +30,8 @@ class UserFixtures extends Fixture
             ->setPassword($this->encoder->encodePassword($user, '12345'))
             ->setEmail('bobama@usa.com')
             ->setNewPass('0');
+        $user->setRole('a:1:{i:0;s:9:"ROLE_USER";}');
+        $user->setAvatar('aaca0f5eb4d2d98a6ce6dffa99f8254b.png');
         $manager->persist($user);
         $this->addReference('bobama', $user);
 
@@ -39,6 +41,8 @@ class UserFixtures extends Fixture
             ->setPassword($this->encoder->encodePassword($user, '54321'))
             ->setEmail('emacron@france.fr')
             ->setNewPass('0');
+        $user->setRole('a:1:{i:0;s:9:"ROLE_USER";}');
+        $user->setAvatar('aaca0f5eb4d2d98a6ce6dffa99f8254b.png');
         $manager->persist($user);
         $this->addReference('emacron', $user);
 
@@ -48,6 +52,8 @@ class UserFixtures extends Fixture
             ->setPassword($this->encoder->encodePassword($user, '12345'))
             ->setEmail('bobama@usa.com')
             ->setNewPass('0');
+        $user->setRole('a:1:{i:0;s:9:"ROLE_USER";}');
+        $user->setAvatar('aaca0f5eb4d2d98a6ce6dffa99f8254b.png');
         $manager->persist($user);
         $this->addReference('amerkel', $user);
 

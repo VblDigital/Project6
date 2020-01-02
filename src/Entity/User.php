@@ -32,7 +32,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="6", minMessage="Votre mot de passe doir contenir 6 caractères")
+     * @Assert\Length(min="6", minMessage="Votre mot de passe doit contenir 6 caractères")
      */
     private $password;
 
@@ -330,5 +330,21 @@ class User implements UserInterface
 
     public function setNewPass ( string $string )
     {
+    }
+
+    /**
+     * @param mixed $contributor
+     */
+    public function setContributor ( $contributor ): void
+    {
+        $this->contributor = $contributor;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole ( $role ): void
+    {
+        $this->role = $role;
     }
 }

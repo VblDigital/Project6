@@ -152,7 +152,7 @@ class SecurityController extends AbstractController
     {
         if (!$this->isRequestInTime($user->getPasswordRequestedAt())) {
             $this->addFlash('danger', 'Ce lien n\'est plus valide. Il n\'est valable que 24h. Merci de refaire votre demande.');
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('password_recovery');
         }
 
         $form = $this->createForm(NewPassType::class, $user);

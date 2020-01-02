@@ -347,7 +347,6 @@ label
 .fa-arrow-circle-down{
     font-size: 7em;
     position: relative;
-    top: 30px;
     right: -670px;
 }
 
@@ -512,6 +511,10 @@ a.nav-link {
 .pb10
 {
     padding-bottom: 10px;
+}
+
+.pl15{
+    padding-left: 15px;
 }
 
 .pt20

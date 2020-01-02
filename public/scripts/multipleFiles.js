@@ -5,7 +5,7 @@ var $addImageButton = $('<button type="button" class="add_image">Ajouter une nou
 var $newLinkImage = $('<p></p>').append($addImageButton);
 
 jQuery(document).ready(function() {
-        $collectionImageHolder = $('div.images');
+    $collectionImageHolder = $('div.images');
     $collectionImageHolder.append($newLinkImage);
     $collectionImageHolder.data('imageIndex',$('.startIndex').val());
 
@@ -38,7 +38,7 @@ var $newLinkVideo = $('<p></p>').append($addVideoButton);
 jQuery(document).ready(function() {
     $collectionVideoHolder = $('div.videos');
     $collectionVideoHolder.append($newLinkVideo);
-    $collectionVideoHolder.data('videoIndex', $collectionVideoHolder.find(':input').length);
+    $collectionVideoHolder.data('videoIndex',$('.startIndex').val());
 
     $addVideoButton.on('click', function(e) {
         addVideoForm($collectionVideoHolder, $newLinkVideo);

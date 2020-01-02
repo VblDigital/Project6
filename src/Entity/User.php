@@ -58,8 +58,7 @@ class User implements UserInterface
     private $passwordRequestedAt;
 
     /**
-     * @var string
-     *
+     * @var string     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $token;

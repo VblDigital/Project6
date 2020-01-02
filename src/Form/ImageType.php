@@ -11,14 +11,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('file', FileType::class, [
-                'label' => false,
-                'required' => false,
-            ])
-        ;
-    }
+{
+    $builder
+        ->add('file', FileType::class, [
+            'label' => false,
+            'required' => false,
+        ])
+    ;
+}
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

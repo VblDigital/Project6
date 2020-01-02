@@ -2,26 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Video;
+use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VideoType extends AbstractType
+class VideosType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fileName', UrlType::class, [
-                'label' => false
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                'by_reference' => false,
+                'label' => false,
+                'allow_add' => true,
             ])
         ;
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Video::class
+            'data_class' => Trick::class,
         ]);
     }
 }

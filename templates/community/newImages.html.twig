@@ -1,0 +1,10 @@
+{% block collection_widget_image %}
+    <div class="panel panel-default">
+        {{ form_start(formImages) }}
+                <div class="images" data-prototype-image="{{ form_widget(formImages.images.vars.prototype)|e('html_attr') }}">
+                </div>
+                {% do formImages.images.setRendered %}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(formImages) }}
+    </div>
+{% endblock %}

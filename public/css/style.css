@@ -46,22 +46,26 @@ img.avatar {
     padding: 0 0 10px 0;
 }
 
+/* Button */
+.btn-primary{
+    font-size: 20px;
+}
+
 /* Comment */
 .comment-text-title {
-    font-size: 1.5em;
+    font-size: 25px;
+    font-family: Wreckers, serif;
+}
+
+.comment-text-subtitle {
+    font-size: 20px;
     font-family: Wreckers, serif;
 }
 
 .comment-text {
-    font-size: 1em;
-    font-family: Wreckers, serif;
-}
-
-.comment-credentials {
-    font-size: 0.8em;
+    font-size: 20px;
     font-family: ModernSans-Light, serif;
 }
-
 
 /* Custom */
 
@@ -361,6 +365,16 @@ p.footer_icone
     float: right;
 }
 
+i.square25::before
+{
+    font-size: 25px;
+}
+
+.fa-caret-left, .fa-caret-right
+{
+    color: #3688ae;
+}
+
 /* Image */
 .imageTrickHome
 {
@@ -419,6 +433,14 @@ div.row
     float: none;
 }
 
+div.images{
+    width: 450px;
+}
+
+div.videos{
+    width: 450px;
+}
+
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
@@ -441,7 +463,7 @@ a.up
 a.return
 {
     font-family: ModernSans-Light, serif;
-    font-size: 1.5em;
+    font-size: 30px;
 }
 
 a.nav-link {
@@ -563,6 +585,16 @@ h2
     font-family: Wreckers, serif;
 }
 
+h3.newTitle
+{
+    font-family: ModernSans-Light, serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 0 10px 0;
+    text-decoration: underline;
+
+}
+
 h4
 {
     font-weight: bold;
@@ -603,7 +635,7 @@ h4.underline
 
 .view-trick-infos {
     font-family: ModernSans-Light, serif;
-    font-size: 1em;
+    font-size: 18px;
     padding: 10px 0px 30px 10px ;
     background-color: #3688ae;
     color: white;

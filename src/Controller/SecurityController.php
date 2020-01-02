@@ -2,21 +2,23 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Form\NewPassType;
 use App\Form\EmailType;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * Class SecurityController
@@ -26,6 +28,10 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="security_registration")
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -63,6 +69,10 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/newpassword", name="password_recovery")
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param TokenGeneratorInterface $tokenGenerator
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function request(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
     {
@@ -116,6 +126,11 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @param \Datetime|null $passwordRequestedAt
+     * @return bool
+     * @throws \Exception
+     */
     private function isRequestInTime(\Datetime $passwordRequestedAt = null)
     {
         if ($passwordRequestedAt === null)
@@ -148,10 +163,9 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
-
             $user = $entityManager->getRepository(User::class)->findOneByToken($token);
 
-            /* @var $user User */
+            /* @var User $user*/
             if ($user === null) {
                 $this->addFlash('danger', 'Ce lien n\'est plus valide. Il n\'est utilisable qu\'une seule fois. Merci de refaire votre demande.');
                 return $this->redirectToRoute('password_recovery');
@@ -169,7 +183,7 @@ class SecurityController extends AbstractController
             $this->addFlash('notice', 'Votre mot de passe a été mis à jour');
 
             return $this->redirectToRoute('security_login');
-        }else {
+        } else {
 
             return $this->render('security/passwordReset.html.twig', [
                 'token' => $token,
@@ -187,16 +201,7 @@ class SecurityController extends AbstractController
 
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+        return $this->render('security/login.html.twig');
     }
 
     /**

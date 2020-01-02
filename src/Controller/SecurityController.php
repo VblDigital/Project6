@@ -61,8 +61,6 @@ class SecurityController extends AbstractController
             
             $this->addFlash('notice', 'Votre compte a bien été créé' );
 
-            $this->addFlash('notice', 'Votre compte a bien été créé' );
-
             return $this->redirectToRoute('security_login');
         }
 

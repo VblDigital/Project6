@@ -30,6 +30,7 @@ Html, Css (Bootstrap), Php (POO), Mysql.
 
 Versioning
 GitHub - Web-based hosting service for version control using Git. Repository : <https://github.com/vbopenclass/Project6>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/90fd59cda4334d588ba9443e6ddcd718)](https://www.codacy.com/manual/vbopenclass/Project6?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vbopenclass/Project6&amp;utm_campaign=Badge_Grade)
 
 Authors
 Valérie Bleser - vbopenclass

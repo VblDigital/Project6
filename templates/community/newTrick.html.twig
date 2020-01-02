@@ -10,8 +10,8 @@
 
 {% block body %}
     <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="pt10 pb10">
+        <div class="panel-body-newTrick">
+            <div class="newTrickForm">
                 {% if editMode %}
                     <h2>Modification du trick</h2>
                 {% else %}
@@ -50,19 +50,6 @@
                 {{ form_label(formTrick.mainImageLink, "Image principale : ",  {'label_attr': {'class': 'form-title'}}) }}<span class="red">*</span>
                 {{ form_widget(formTrick.mainImageLink) }}
             {% endif %}
-
-{#            {% block collection_widget_video %}#}
-{#                {% if editMode %}#}
-{#                    {% do formTrick.videos.setRendered %}#}
-{#                {% else %}#}
-{#                    <p class="form-title"><u>Liens vers les vidéos :</u></p>#}
-{#                    <p>Pour insérer une vidéo, merci de la poster sur Youtube et copier-coller le lien du type :#}
-{#                        https://www.youtube.com/embed/[référence de la vidéo]<br/></p>#}
-{#                    <div class="videos" data-prototype-video="{{ form_widget(formTrick.videos.vars.prototype, {'attr': {'placeholder': "https://www.youtube.com/embed/[référence de la vidéo]"}})|e('html_attr')}}">#}
-{#                    </div>#}
-{#                {% endif %}#}
-{#                {% do formTrick.videos.setRendered %}#}
-{#            {% endblock %}#}
             <div class="pt10 pb10">
                 <button type="submit" class="btn btn-primary">
                 {% if editMode %}

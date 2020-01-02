@@ -4,8 +4,13 @@
 
 {% block body %}
     <form action="{{ path('security_login') }}" method="post">
-        {% if error %}
-            <div class="red pt10 pl15">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+
+        {% if app.session.flashBag.has('notice') %}
+            <p class="red">
+                {% for msg in app.session.flashBag.get('notice') %}
+                    {{ msg }}
+                {% endfor %}
+            </p>
         {% endif %}
         <div class="panel-body">
             <h2>Se connecter</h2>

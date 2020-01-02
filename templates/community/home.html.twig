@@ -28,8 +28,15 @@
                 </div>
             </div>
         </div>
+        {% if app.session.flashBag.has('notice') %}
+            <p class="red">
+                {% for msg in app.session.flashBag.get('notice') %}
+                    {{ msg }}
+                {% endfor %}
+            </p>
+        {% endif %}
+        {% for trick in tricks %}
         <div class="row">
-            {% for trick in tricks %}
             <div class="blocTricks">
                 <div class="card mb-3 card-size">
                     <span class="tricks-anchor" id="tricks"></span>
@@ -48,9 +55,9 @@
                             Créé par <b>{{ trick.author.username }}</b>|| Catégorie : <b>{{ trick.category.name }}</b>
                             <div class="icone_right">
                             {% if app.user %}
-                            <a href="/trick/{{ trick.slug }}/edit"><i class="far fa-edit fa-1x"></i></a>
+                            <a href="/trick/{{ trick.id }}/edit"><i class="far fa-edit fa-1x"></i></a>
                                 {% if app.user == trick.author %}
-                                    <a href="/trick/{{ trick.slug }}/delete" class="delete"
+                                    <a href="/trick/{{ trick.id }}/delete" class="delete"
                                        data-confirm="Etes-vous sûr de vouloir supprimer ce Trick ? Cette action n'est pas réversible">
                                         <i class="fas fa-trash-alt fa"></i>
                                     </a>

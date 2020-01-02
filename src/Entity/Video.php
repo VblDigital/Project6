@@ -52,9 +52,9 @@ class Video
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileName()
+    public function getFileName(): ?string
     {
         return $this->fileName;
     }
@@ -63,7 +63,7 @@ class Video
      * @param string $fileName
      * @return Video
      */
-    public function setFileName($fileName)
+    public function setFileName(string $fileName)
     {
         $this->fileName = $fileName;
         return $this;

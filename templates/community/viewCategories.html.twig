@@ -3,15 +3,21 @@
 {% block title %}Les catégories{% endblock %}
 
 {% block body %}
-    <p><h2>Les catégories</h2></p>
-    <section class="list-group">
-        {% for category in category %}
-            <div class="list-group">
-                <ul>
-                    <li>{{ category.name }}</li>
-                </ul>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="pt10 pb10">
+                <h2>Les catégories</h2>
             </div>
-        {% endfor %}
-    </section>
-    <p>Ajouter un <a href="{{ path('new_trick') }}">Trick</a></p>
+            <section class="list-group">
+                {% for category in category %}
+                    <div class="list-group">
+                        <ul>
+                            <li class="form-title">{{ category.name }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </section>
+            <p>Ajouter un <a href="{{ path('new_trick') }}">Trick</a></p>
+        </div>
+    </div>
 {% endblock %}

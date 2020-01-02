@@ -31,18 +31,6 @@ class TrickType extends AbstractType
                 'constraints' => array(
                     new File())
             ])
-            ->add('images', CollectionType::class, [
-                'entry_type' => ImageType::class,
-                'by_reference' => false,
-                'label' => false,
-                'allow_add' => true
-             ])
-            ->add('videos', CollectionType::class, [
-                'entry_type' => VideoType::class,
-                'by_reference' => false,
-                'label' => false,
-                'allow_add' => true,
-            ])
         ;
     }
 

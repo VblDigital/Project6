@@ -1,0 +1,13 @@
+{% block collection_widget_video %}
+    <div class="panel panel-default">
+        {{ form_start(formVideos) }}
+            <p>Pour insérer une vidéo, merci de la poster sur Youtube et copier-coller le lien du type :
+                https://www.youtube.com/embed/[référence de la vidéo]<br/></p>
+            <div class="videos" data-prototype-video="{{ form_widget(formVideos.videos.vars.prototype,
+                {'attr': {'placeholder': "https://www.youtube.com/embed/[référence de la vidéo]"}})|e('html_attr')}}">
+            </div>
+            {% do formVideos.videos.setRendered %}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(formVideos) }}
+    </div>
+{% endblock %}

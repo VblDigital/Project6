@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition d'un trick{% endblock %}
+{% block title %}
+    {% if editMode %}
+        Modification du trick
+    {% else %}
+        Création d'un trick
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     <div class="panel panel-default">
@@ -27,14 +33,14 @@
             {{ form_widget(formTrick.category) }}
             {% if editMode %}
                 {% if app.user == trick.author %}
-                    <p class="form-title">Image principale :</p><span class="red">*</span>
+                    <p class="form-title">Image principale :<span class="red">*</span></p>
                     <div class="backgroundImage">
                         <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ link) }}" alt="Image principale" />
                     </div>
                     {{ form_label(formTrick.mainImageLink, "Remplacer l'image principale") }}
                     {{ form_widget(formTrick.mainImageLink) }}
                 {% else %}
-                    <p class="form-title">Image principale :</p><span class="red">*</span>
+                    <p class="form-title">Image principale :<span class="red">*</span></p>
                     <div class="backgroundImage">
                         <img class="d-block w-100" src="{{ asset('img/trickMainImage/' ~ link) }}" alt="Image principale" />
                     </div>
@@ -44,20 +50,19 @@
                 {{ form_label(formTrick.mainImageLink, "Image principale : ",  {'label_attr': {'class': 'form-title'}}) }}<span class="red">*</span>
                 {{ form_widget(formTrick.mainImageLink) }}
             {% endif %}
-            {% block collection_widget_image %}
-                <p class="form-title"><u>Autres images d'illustration :</u></p>
-                <div class="images" data-prototype-image="{{ form_widget(formTrick.images.vars.prototype)|e('html_attr') }}">
-                </div>
-                {% do formTrick.images.setRendered %}
-            {% endblock %}
-            {% block collection_widget_video %}
-                <p class="form-title"><u>Liens vers les vidéos :</u></p>
-                <p>Pour insérer une vidéo, merci de la poster sur Youtube et copier-coller le lien du type :
-                    https://www.youtube.com/embed/[référence de la vidéo]<br/></p>
-                <div class="videos" data-prototype-video="{{ form_widget(formTrick.videos.vars.prototype, {'attr': {'placeholder': "https://www.youtube.com/embed/[référence de la vidéo]"}})|e('html_attr')}}">
-                </div>
-                {% do formTrick.videos.setRendered %}
-            {% endblock %}
+
+{#            {% block collection_widget_video %}#}
+{#                {% if editMode %}#}
+{#                    {% do formTrick.videos.setRendered %}#}
+{#                {% else %}#}
+{#                    <p class="form-title"><u>Liens vers les vidéos :</u></p>#}
+{#                    <p>Pour insérer une vidéo, merci de la poster sur Youtube et copier-coller le lien du type :#}
+{#                        https://www.youtube.com/embed/[référence de la vidéo]<br/></p>#}
+{#                    <div class="videos" data-prototype-video="{{ form_widget(formTrick.videos.vars.prototype, {'attr': {'placeholder': "https://www.youtube.com/embed/[référence de la vidéo]"}})|e('html_attr')}}">#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#                {% do formTrick.videos.setRendered %}#}
+{#            {% endblock %}#}
             <div class="pt10 pb10">
                 <button type="submit" class="btn btn-primary">
                 {% if editMode %}

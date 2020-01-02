@@ -205,10 +205,7 @@ class TrickController extends AbstractController
 
         if(!$trick) {
             $this->addFlash('notice', 'Ce Trick n\'existe pas.' );
-            return $this->redirectToRoute('view_trick', [
-                'id' => $trick->getId(),
-                'slug' => $trick->getSlug()
-            ]);
+            return $this->redirectToRoute('home');
         }
         $comments = $em->getRepository(Comment::class)->findBy(['trick' => $trick->getId()]);
         foreach ($comments as $comment){

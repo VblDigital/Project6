@@ -185,7 +185,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ->setLastEditDate(new \DateTime('01/01/2020'))
             ->setName("La rotation trois six")
             ->setDescription("Une rotation horizontale executée pendant le saut, avec atterrissage en position switch ou normal et d'une rotation de 360 degrés d'angle, soit un tour complet.")
-            ->setMainImageLink("http://c21f969b5f03d33d43e04f8f136e7682.png")
+            ->setMainImageLink("c21f969b5f03d33d43e04f8f136e7682.png")
             ->setChapo("Une rotation horizontale executée pendant le saut, avec atterrissage en position switch ou normal et d'une rotation de 360 degrés d'angle, soit un tour complet.")
             ->setAuthor($this->getReference('emacron'));
         $trick->setContributor($this->getReference('emacron'));

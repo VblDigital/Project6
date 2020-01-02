@@ -21,7 +21,7 @@
             </div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {% endif %}
-            <div class="col-sm-2 col-md-5">
+            <div class="newTrickForm">
             {{ form_start(formTrick) }}
             {{ form_label(formTrick.name, "Nom :", {'label_attr': {'class': 'form-title'}}) }}<span class="red">*</span>
             {{ form_widget(formTrick.name) }}

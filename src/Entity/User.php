@@ -328,7 +328,7 @@ class User implements UserInterface
         $this->avatar = $avatar;
     }
 
-    public function setNewPass ( string $string )
+    public function setNewPass ()
     {
     }
 }

@@ -11,13 +11,13 @@ This blog has been developed with Symfony 4.3.4
 Installing
 Please follow the step by step procedure to install the website locally.
 
-* Clone or download the website in the folder of your local server. For exemple : 'C:\wamp64\www\'
-* Create a file .env in the same folder than index.php and insert your credentials for Database and SMTP.
-* Install the dependencies ```composer install```
-* Create the Database ```php bin/console do:da:cr```
-* Create the tables ```php bin/console do:sc:up --force```
-* Use the fixtures to insert content in Database => ``` php bin/console do:fi:lo --append```
-* Start the server ```php bin/console se:ru```
+*   Clone or download the website in the folder of your local server. For exemple : 'C:\wamp64\www\'
+*   Create a file .env in the same folder than index.php and insert your credentials for Database and SMTP.
+*   Install the dependencies ```composer install```
+*   Create the Database ```php bin/console do:da:cr```
+*   Create the tables ```php bin/console do:sc:up --force```
+*   Use the fixtures to insert content in Database => ``` php bin/console do:fi:lo --append```
+*   Start the server ```php bin/console se:ru```
 
 Built With
 Symfony 4.3.4
@@ -29,7 +29,7 @@ Used languages
 Html, Css (Bootstrap), Php (POO), Mysql.
 
 Versioning
-GitHub - Web-based hosting service for version control using Git. Repository : https://github.com/vbopenclass/Project6
+GitHub - Web-based hosting service for version control using Git. Repository : <https://github.com/vbopenclass/Project6>
 
 Authors
 Valérie Bleser - vbopenclass

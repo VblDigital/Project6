@@ -59,11 +59,12 @@ img.avatar {
 
 .comment-text-subtitle {
     font-size: 20px;
-    font-family: Wreckers, serif;
+    font-family: ModernSans-Light, serif;
 }
 
 .comment-text {
     font-size: 20px;
+    font-weight: bold;
     font-family: ModernSans-Light, serif;
 }
 
@@ -296,6 +297,10 @@ img.avatar {
     width: 250px;
 }
 
+.newTrickForm{
+    width: 500px;
+}
+
 label
 {
     padding: 10px;
@@ -304,6 +309,11 @@ label
 .panel-body {
     padding-left: 100px;
     padding-right: 100px;
+}
+
+.panel-body-newTrick {
+    padding-left: 100px;
+    width: 500px;
 }
 
 .form-title {

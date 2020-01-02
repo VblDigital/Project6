@@ -196,7 +196,7 @@ class TrickController extends AbstractController
         ]);
     }
     /**
-     * @Route("/trick/{id}/delete", name="delete_trick")
+     * @Route("/trick/{slug}/delete", name="delete_trick")
      */
     public function deleteTrick(Trick $trick = null, Request $request, ObjectManager $manager, $id)
     {
@@ -210,7 +210,10 @@ class TrickController extends AbstractController
                 'slug' => $trick->getSlug()
             ]);
         }
-
+        $comments = $em->getRepository(Comment::class)->findBy(['trick' => $trick->getId()]);
+        foreach ($comments as $comment){
+            $em->remove($comment);
+        }
         $em->remove($trick);
         $em->flush();
         return $this->redirectToRoute('home');

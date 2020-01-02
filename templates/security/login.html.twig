@@ -5,7 +5,7 @@
 {% block body %}
     <form action="{{ path('security_login') }}" method="post">
         {% if app.session.flashBag.has('notice') %}
-            <p class="panel-body-red">
+            <p class="red">
                 {% for msg in app.session.flashBag.get('notice') %}
                     {{ msg }}
                 {% endfor %}
@@ -15,13 +15,13 @@
             <h2>Se connecter</h2>
             <div class="form-group">
                 <div class="loginForm">
-                    <label for="login">Identifiant</label>
+                    <label for="login">Identifiant :</label>
                     <input type="text" class="form-control" id="login" name="_username">
                 </div>
             </div>
             <div class="form-group">
                 <div class="loginForm">
-                    <label for="password">Mot de passe</label>
+                    <label for="password">Mot de passe :</label>
                     <input type="password" class="form-control" id="password" name="_password">
                 </div>
             </div>

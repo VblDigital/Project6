@@ -75,7 +75,7 @@ img.avatar {
 }
 
 .custom-file-control.selected:lang(en)::after {
-    content: "" !important;
+    content: "";
 }
 
 /* Card */

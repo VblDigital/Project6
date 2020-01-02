@@ -8,8 +8,8 @@
             Publier le premier commentaire !
             {% else %}
                 {% for comment in comments %}
-                    {{ comment.text | raw }}<br/>
-                    <div class="comment-text">
+                    <div class="comment-text">{{ comment.text | raw }}</div>
+                    <div>
                         Posté par <img class="avatar" src="{{ asset('/img/avatar/' ~ comment.user.avatar) }}" alt="avatar" />
                         {{ comment.user.username }} le {{ comment.date | date ('d/m/y à H:i') }}<br/>
                     </div>

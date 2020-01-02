@@ -196,7 +196,7 @@ class TrickController extends AbstractController
         ]);
     }
     /**
-     * @Route("/trick/{slug}/delete", name="delete_trick")
+     * @Route("/trick/{id}/delete", name="delete_trick")
      */
     public function deleteTrick(Trick $trick = null, Request $request, ObjectManager $manager, $id)
     {

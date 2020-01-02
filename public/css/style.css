@@ -316,6 +316,11 @@ label
     width: 500px;
 }
 
+.panel-body-pass {
+    padding-left: 100px;
+    width: 700px;
+}
+
 .form-title {
     font-family: ModernSans-Light, serif;
     font-size: 1.1em;

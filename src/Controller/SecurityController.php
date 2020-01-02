@@ -152,7 +152,7 @@ class SecurityController extends AbstractController
     {
         if (!$this->isRequestInTime($user->getPasswordRequestedAt())) {
             $this->addFlash('danger', 'Ce lien n\'est plus valide. Il n\'est valable que 24h. Merci de refaire votre demande.');
-            return $this->redirectToRoute('password_recovery');
+            return $this->redirectToRoute('home');
         }
 
         $form = $this->createForm(NewPassType::class, $user);
@@ -167,7 +167,7 @@ class SecurityController extends AbstractController
             /* @var User $user*/
             if ($user === null) {
                 $this->addFlash('danger', 'Ce lien n\'est plus valide. Il n\'est utilisable qu\'une seule fois. Merci de refaire votre demande.');
-                return $this->redirectToRoute('password_recovery');
+                return $this->redirectToRoute('home');
             }
 
             $user
@@ -181,7 +181,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('notice', 'Votre mot de passe a été mis à jour');
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('home');
         } else {
 
             return $this->render('security/passwordReset.html.twig', [
